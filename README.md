@@ -1,30 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# rsc-www
+modern recreation of the
+[runescape classic](https://classic.runescape.wiki/w/RuneScape_Classic)
+website. built using [nextjs](https://nextjs.org/) and
+[express](https://expressjs.com/).
 
-## Getting Started
+## install
 
-First, run the development server:
+    # npm install -g @2003scape/rsc-www
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## cli usage
+rsc-www connects to
+[rsc-data-server](https://github.com/2003scape/rsc-data-server) for database
+saving/loading and interacting with the game worlds. it supports TCP with
+TLS or IPC [domain sockets](https://en.wikipedia.org/wiki/Unix_domain_socket).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## license
+Copyright (C) 2020 2003Scape Team
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
 
-## Learn More
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Affero General Public License for more details.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+You should have received a copy of the GNU Affero General Public License
+along with this program. If not, see http://www.gnu.org/licenses/.

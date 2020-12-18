@@ -8,8 +8,8 @@ function GameSelectButton(props) {
 
     return (
         <div className={`rsc-game-select rsc-select-${type}`}>
-            <Link href="#">
-                <a class="rsc-select-button">
+            <Link href="//farts.com">
+                <a className="rsc-select-button">
                     <small>Click here for</small>
 
                     <strong>
@@ -34,8 +34,8 @@ export default function Play(props) {
                     <GameSelectButton type="free" />
                     <GameSelectButton type="members" />
                 </section>
-                <div class="rsc-scroll">
-                    <label for="rsc-client-type">
+                <div className="rsc-scroll">
+                    <label htmlFor="rsc-client-type">
                         Select client version - only change this if the default
                         doesn't work
                     </label>

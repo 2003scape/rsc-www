@@ -11,6 +11,11 @@ export default function NotFound() {
             <Header pageName={PAGE_TITLE} />
             <Container>
                 <PageName pageName={PAGE_TITLE} />
+                <div className="rsc-row">
+                    <div className="rsc-col-100 rsc-box">
+                        <p>Nothing interesting happens.</p>
+                    </div>
+                </div>
             </Container>
         </div>
     );

@@ -12,10 +12,15 @@ export default function ButtonWheel(props) {
     });
 
     buttons.unshift(
-        <Link key={buttons.length} href="./play">
-            <a className="rsc-button rsc-play-button">Play Game</a>
+        <Link key={buttons.length} href="/play">
+            <a
+                className="rsc-button rsc-play-button"
+                title="Start or continue your RuneScape adventure"
+            >
+                Play Game
+            </a>
         </Link>
     );
 
-    return <section className="rsc-button-wheel">{buttons}</section>;
+    return <nav className="rsc-button-wheel">{buttons}</nav>;
 }

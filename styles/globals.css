@@ -11,6 +11,7 @@ button {
     border: 0;
 }
 
+label,
 h1,
 h2,
 h3,
@@ -18,7 +19,7 @@ h4,
 h5,
 h6 {
     font-size: 13px;
-    margin: 0;
+    margin: 0 0 4px 0;
 }
 
 /* re-usable components */
@@ -34,6 +35,10 @@ h6 {
 
 .rsc-link:hover {
     text-decoration: underline;
+}
+
+.rsc-input {
+    margin: 4px;
 }
 
 .rsc-player-count {
@@ -71,7 +76,7 @@ h6 {
     background: url(../public/stone-background.png);
     border: 3px outset #373737;
     box-sizing: border-box;
-    padding: 4px 4px 16px 4px;
+    padding: 4px;
     margin: auto auto 8px auto;
 }
 
@@ -149,6 +154,11 @@ h6 {
 
 .rsc-col-50 {
     width: 50%;
+    padding: 0 2% 0 2%;
+}
+
+.rsc-col-100 {
+    width: 100%;
     padding: 0 2% 0 2%;
 }
 
@@ -380,8 +390,14 @@ h6 {
 }
 
 .rsc-hiscores-skills li {
-    margin-top: 2px;
-    margin-bottom: 2px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    width: 100%;
+}
+
+.rsc-hiscores-skills li a {
+    display: inline-block;
+    width: 100%;
 }
 
 .rsc-hiscores-ranks {
@@ -408,6 +424,11 @@ h6 {
 .rsc-col-name {
     width: 38%;
     word-wrap: break-word;
+}
+
+.rsc-col-name a {
+    display: inline-block;
+    width: 100%;
 }
 
 .rsc-col-level {

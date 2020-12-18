@@ -4,37 +4,37 @@ import Header from '../components/header';
 
 const WHEEL_LINKS = [
     {
-        href: './manual',
+        href: '/manual',
         name: 'Manual',
         title: 'How to play RuneScape'
     },
     {
-        href: './support',
+        href: '/support',
         name: 'Customer Support',
         title: 'Message the moderators'
     },
     {
-        href: './community',
+        href: '/community',
         name: 'Community',
         title: 'Forums, chat-rooms and places to discuss RuneScape'
     },
     {
-        href: './support',
+        href: '/support',
         name: 'Message Centre',
         title: 'Read messages sent by moderators'
     },
     {
-        href: './news',
+        href: '/news',
         name: 'News & Updates',
         title: 'Read the latest news about RuneScape'
     },
     {
-        href: './library',
+        href: '/library',
         name: 'Library of Varrock',
         title: 'Explore intruiging RuneScape lore'
     },
     {
-        href: './hiscores',
+        href: '/hiscores',
         name: 'Hiscores',
         title: 'See how your skills compare against the community'
     }

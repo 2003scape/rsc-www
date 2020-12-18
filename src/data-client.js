@@ -131,6 +131,15 @@ class DataClient {
         });
     }
 
+    async getHiscoreRanks(skill = 'overall', rank = -1, page = 0) {
+        return await this.sendAndReceive({
+            handler: 'getHiscoreRanks',
+            skill,
+            rank,
+            page
+        });
+    }
+
     async authenticate() {
         const result = await this.sendAndReceive({
             handler: 'authenticate',
