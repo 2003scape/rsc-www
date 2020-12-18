@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const DataClient = require('./data-client');
+const applyAPI = require('./api');
 const bole = require('bole');
 const express = require('express');
 const fs = require('fs').promises;
@@ -54,13 +55,14 @@ bole.output({
         return;
     }
 
-    const server = express();
     const app = next({ dev: process.env.NODE_ENV !== 'production' });
 
     await app.prepare();
 
+    const server = express();
     const handle = app.getRequestHandler();
 
+    applyAPI(app, dataClient);
     server.all('*', handle);
 
     server.listen(config.port, (err) => {
