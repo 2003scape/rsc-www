@@ -7,6 +7,8 @@ export default function PageName(props) {
             <Link href="/">
                 <a className="rsc-link">Main menu</a>
             </Link>
+            {props.children ? ' - ' : ''}
+            {props.children}
         </header>
     );
 }

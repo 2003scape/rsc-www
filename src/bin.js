@@ -62,7 +62,7 @@ bole.output({
     const server = express();
     const handle = app.getRequestHandler();
 
-    applyAPI(app, dataClient);
+    applyAPI(server, dataClient);
     server.all('*', handle);
 
     server.listen(config.port, (err) => {

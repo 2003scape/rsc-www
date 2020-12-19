@@ -11,7 +11,6 @@ button {
     border: 0;
 }
 
-label,
 h1,
 h2,
 h3,
@@ -39,6 +38,10 @@ h6 {
 
 .rsc-input {
     margin: 4px;
+    box-sizing: border-box;
+    display: inline-block;
+    height: 26px;
+    max-width: 80%;
 }
 
 .rsc-player-count {
@@ -49,6 +52,7 @@ h6 {
 .rsc-container {
     background: url(../public/border-left.png) repeat-y,
         url(../public/border-right.png) repeat-y,
+        /*url(../public/christmas-background.jpg) repeat;*/
         url(../public/background.png) repeat;
     background-position: 0 43px, right 43px;
     margin: 20px auto 0 auto;
@@ -83,14 +87,6 @@ h6 {
 .rsc-stone-box label {
     display: block;
     font-weight: bold;
-}
-
-.rsc-stone-box input[type='text'],
-.rsc-stone-box input[type='number'] {
-    box-sizing: border-box;
-    display: inline-block;
-    height: 26px;
-    max-width: 100%;
 }
 
 .rsc-header {
@@ -135,6 +131,7 @@ h6 {
 
 .rsc-row {
     display: flex;
+    justify-content: center;
     padding: 0 4% 0 4%;
 }
 
@@ -255,7 +252,9 @@ h6 {
 }
 
 .rsc-button:hover,
-.rsc-button:focus {
+.rsc-button:focus,
+.rsc-arrow:hover,
+.rsc-arrow:focus {
     filter: brightness(115%);
 }
 
@@ -312,6 +311,44 @@ h6 {
 .rsc-stone-button:nth-child(8) {
     right: 24%;
     top: 20%;
+}
+
+.rsc-arrow {
+    background: url(../public/arrow-button.png) no-repeat;
+    width: 43px;
+    height: 29px;
+    display: block;
+    cursor: pointer;
+    float: right;
+}
+
+.rsc-arrow:active:not([disabled]) {
+    transform: scale(0.9);
+}
+
+.rsc-arrow.rsc-arrow-back:active:not([disabled]) {
+    transform: scale(-0.9, 0.9);
+}
+
+.rsc-arrow-back {
+    transform: scaleX(-1);
+    float: left;
+}
+
+.rsc-arrow-wrap {
+    margin: 2px auto 2px auto;
+    padding: 0 32px 0 32px;
+}
+
+.rsc-disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.rsc-disabled,
+.rsc-disabled:hover,
+.rsc-disabled:focus {
+    filter: grayscale(100%);
 }
 
 /* game select */
@@ -390,14 +427,14 @@ h6 {
 }
 
 .rsc-hiscores-skills li {
-    margin-top: 4px;
-    margin-bottom: 4px;
+    margin: 0;
     width: 100%;
 }
 
 .rsc-hiscores-skills li a {
     display: inline-block;
     width: 100%;
+    padding: 2px 0 2px 0;
 }
 
 .rsc-hiscores-ranks {
@@ -414,6 +451,10 @@ h6 {
 
 .rsc-hiscores-ranks td {
     padding: 0;
+}
+
+.rsc-hiscores-ranks td * {
+    padding: 2px 0 2px 0;
 }
 
 .rsc-col-rank {
@@ -564,6 +605,14 @@ h6 {
         padding-left: 4%;
         padding-right: 4%;
         width: 100%;
+    }
+
+    .rsc-hiscores-ranks td * {
+        padding: 4px 0 4px 0;
+    }
+
+    .rsc-hiscores-skills li a {
+        padding: 4px 0 4px 0;
     }
 }
 

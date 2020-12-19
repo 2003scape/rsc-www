@@ -10,7 +10,6 @@ function applyAPI(server, dataClient) {
         dataClient.getHiscoreRanks.bind(dataClient),
         {
             maxAge: CACHE_MS,
-            primitive: true,
             promise: true,
             normalizer: (args) => JSON.stringify(args)
         }
@@ -33,9 +32,14 @@ function applyAPI(server, dataClient) {
         res.setHeader('content-type', 'application/json');
 
         getHiscoreRanks(skill, rank, page)
-            .then(({ ranks }) => {
+            .then(({ ranks, pages }) => {
+                // don't cache empty pages
+                if (!ranks.length) {
+                    getHiscoreRanks.delete(skill, rank, page);
+                }
+
                 try {
-                    res.end(JSON.stringify(ranks));
+                    res.end(JSON.stringify({ ranks, pages }));
                 } catch (e) {
                     next(e);
                 }
