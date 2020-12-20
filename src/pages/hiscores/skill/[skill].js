@@ -19,15 +19,15 @@ const SKILL_NAMES = new Set(['overall'].concat(skillNames));
 const RANKS_PER_PAGE = 16;
 const EMPTY_PROPS = { props: { ranks: [], pages: 0 } };
 
-function RankRow(row = {}, key) {
+function RankRow(props = {}) {
     return (
-        <tr key={key}>
-            <td className="rsc-col-rank">{row.rank || '-'}</td>
+        <tr className={props.className} key={props.key}>
+            <td className="rsc-col-rank">{props.rank || '-'}</td>
             <td className="rsc-col-name">
-                {row.username ? (
-                    <Link href={`/hiscores?name=${row.username}`}>
+                {props.username ? (
+                    <Link href={`/hiscores?name=${props.username}`}>
                         <a className="rsc-link">
-                            {formatUsername(row.username) || '-'}
+                            {formatUsername(props.username) || '-'}
                         </a>
                     </Link>
                 ) : (
@@ -35,11 +35,11 @@ function RankRow(row = {}, key) {
                 )}
             </td>
             <td className="rsc-col-level">
-                {row.level ? row.level.toLocaleString() : '-'}
+                {props.level ? props.level.toLocaleString() : '-'}
             </td>
             <td className="rsc-col-xp">
-                {typeof row.experience === 'number'
-                    ? row.experience.toLocaleString()
+                {typeof props.experience === 'number'
+                    ? props.experience.toLocaleString()
                     : '-'}
             </td>
         </tr>
@@ -50,15 +50,20 @@ export default function HiscoreSkills(props) {
     const router = useRouter();
     const skill = router.query.skill || 'overall';
     const page = !Number.isNaN(+router.query.page) ? +router.query.page : 1;
+    const rank = +(router.query.rank || -1);
     const formattedSkillName = skill[0].toUpperCase() + skill.slice(1);
     const pageTitle = `${PAGE_TITLE} for ${formattedSkillName}`;
 
     const playerRows = props.ranks.map((entry, i) => {
-        return RankRow(entry, i);
+        return RankRow({
+            ...entry,
+            key: i,
+            className: entry.rank === rank ? 'rsc-highlight-row' : ''
+        });
     });
 
     for (let i = playerRows.length; i < RANKS_PER_PAGE; i += 1) {
-        playerRows.push(RankRow({}, i));
+        playerRows.push(RankRow({ key: i }));
     }
 
     const icon = skill !== 'overall' ? <SkillIcon name={skill} /> : '';
@@ -71,11 +76,9 @@ export default function HiscoreSkills(props) {
                 <div className="rsc-row">
                     <aside className="rsc-col rsc-col-36">
                         <h2>Select hiscore table</h2>
-                        <div className="rsc-box rsc-hiscores-skills">
-                            <SkillList selected={skill} />
-                        </div>
+                        <SkillList selected={skill} />
                     </aside>
-                    <section
+                    <main
                         id="ranks"
                         className="rsc-col rsc-col-64"
                         style={{ alignSelf: 'center' }}
@@ -86,7 +89,7 @@ export default function HiscoreSkills(props) {
                                 {formattedSkillName} Hiscores
                             </span>
                         </h2>
-                        <div className="rsc-box rsc-hiscores-ranks">
+                        <div className="rsc-box rsc-hiscores-table">
                             <table>
                                 <thead>
                                     <tr>
@@ -105,7 +108,7 @@ export default function HiscoreSkills(props) {
                                 totalPages={props.pages}
                             />
                         </div>
-                    </section>
+                    </main>
                 </div>
                 <br />
                 <HiscoreControls />
@@ -114,29 +117,33 @@ export default function HiscoreSkills(props) {
     );
 }
 
+function redirect(res, url) {
+    res.setHeader('location', url);
+    res.statusCode = 303;
+    res.end();
+}
+
 export async function getServerSideProps({ res, params, query }) {
     const skill = query.skill ? ('' + query.skill).toLowerCase() : 'overall';
 
     if (!SKILL_NAMES.has(skill)) {
-        res.setHeader('location', `/hiscores/skill/overall`);
-        res.statusCode = 303;
-        res.end();
+        redirect('/hiscores/skill/overall');
         return EMPTY_PROPS;
     }
 
     const page = query.page ? query.page : 1;
+    const rank = query.rank ? query.rank : -1;
 
     const response = await fetch(
-        `http://localhost:1338/api/hiscores/skill/${params.skill}?page=${page}`
+        `http://localhost:1338/api/hiscores/skill/${params.skill}` +
+            `?page=${page}&rank=${rank}`
     );
 
     if (response.ok) {
         const { ranks, pages } = await response.json();
 
         if (page > pages) {
-            res.setHeader('location', `/hiscores/skill/${params.skill}`);
-            res.statusCode = 303;
-            res.end();
+            redirect(`/hiscores/skill/${params.skill}`);
             return EMPTY_PROPS;
         }
 

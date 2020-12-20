@@ -1,4 +1,5 @@
 import Router, { useRouter } from 'next/router';
+import { USERNAME_REGEX, formatUsername } from '../username';
 
 function HiscoreInputWrap(props) {
     return (
@@ -27,7 +28,7 @@ function RankSearch(props) {
                 name="rank"
                 type="number"
                 min="1"
-                required="true"
+                required={true}
                 defaultValue={props.rank}
             />
         </HiscoreInputWrap>
@@ -44,7 +45,7 @@ function NameSearch(props) {
                 name="name"
                 type="text"
                 required={true}
-                pattern="([A-z]|[0-9]| ){3,}"
+                pattern={USERNAME_REGEX}
                 maxLength="12"
                 defaultValue={props.username}
             />
@@ -62,17 +63,18 @@ function NameCompare(props) {
                 name="name"
                 type="text"
                 required={true}
-                pattern="([A-z]|[0-9]| ){3,}"
+                pattern={USERNAME_REGEX}
                 maxLength="12"
                 defaultValue={props.username}
             />
             <input
                 className="rsc-input"
                 id="rsc-search-opponent"
+                aria-label="Opponent username"
                 name="opponent"
                 type="text"
                 required={true}
-                pattern="([A-z]|[0-9]| ){3,}"
+                pattern={USERNAME_REGEX}
                 maxLength="12"
                 defaultValue={props.opponent}
             />
@@ -84,9 +86,9 @@ export default function HiscoreControls(props) {
     const router = useRouter();
 
     const skill = router.query.skill || 'overall';
-    const rank = router.query.rank || 1;
-    const username = router.query.name || '';
-    const opponent = router.query.opponent || '';
+    const rank = +(router.query.rank || 1);
+    const username = formatUsername(router.query.name || '');
+    const opponent = formatUsername(router.query.opponent || '');
 
     const onRankSubmit = (e) => {
         e.preventDefault();
@@ -97,6 +99,8 @@ export default function HiscoreControls(props) {
             pathname: `/hiscores/skill/${skill}`,
             query: { rank: submittedRank }
         });
+
+        window.scrollTo(0, 0);
     };
 
     const onNameSubmit = (e) => {
@@ -108,6 +112,8 @@ export default function HiscoreControls(props) {
             pathname: '/hiscores',
             query: { name: submittedName }
         });
+
+        window.scrollTo(0, 0);
     };
 
     const onCompareSubmit = (e) => {
@@ -120,6 +126,8 @@ export default function HiscoreControls(props) {
             pathname: '/hiscores',
             query: { name: submittedName, opponent: opponentName }
         });
+
+        window.scrollTo(0, 0);
     };
 
     return (

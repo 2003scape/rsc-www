@@ -1,6 +1,7 @@
-const skillNames = new Set(
-    ['overall', ...require('@2003scape/rsc-data/skill-names')]
-);
+const skillNames = new Set([
+    'overall',
+    ...require('@2003scape/rsc-data/skill-names')
+]);
 
 import Link from 'next/link';
 import SkillIcon from './skill-icon';
@@ -13,7 +14,7 @@ export default function SkillList(props) {
 
         return (
             <li key={i}>
-                <Link href={`/hiscores/skill/${name}#ranks`}>
+                <Link href={`/hiscores/skill/${name}`}>
                     <a
                         className="rsc-link"
                         title={`Top players in ${formattedSkillName}`}
@@ -29,5 +30,9 @@ export default function SkillList(props) {
         );
     });
 
-    return <ul>{skillList}</ul>;
+    return (
+        <div className="rsc-box rsc-skill-list">
+            <ul aria-label="List of skills">{skillList}</ul>
+        </div>
+    );
 }

@@ -3,16 +3,21 @@ const memoize = require('memoizee');
 const skillNames = new Set(require('@2003scape/rsc-data/skill-names'));
 skillNames.add('overall');
 
-const CACHE_MS = 1000 * 60 * 5;
+const MEMOIZE_OPTIONS = {
+    maxAge: 1000 * 60 * 5,
+    promise: true,
+    normalizer: (args) => JSON.stringify(args)
+};
 
 function applyAPI(server, dataClient) {
     const getHiscoreRanks = memoize(
         dataClient.getHiscoreRanks.bind(dataClient),
-        {
-            maxAge: CACHE_MS,
-            promise: true,
-            normalizer: (args) => JSON.stringify(args)
-        }
+        MEMOIZE_OPTIONS
+    );
+
+    const getPlayerRanks = memoize(
+        dataClient.getPlayerRanks.bind(dataClient),
+        MEMOIZE_OPTIONS
     );
 
     server.get('/api/hiscores/skill/:skill', (req, res, next) => {
@@ -40,6 +45,33 @@ function applyAPI(server, dataClient) {
 
                 try {
                     res.end(JSON.stringify({ ranks, pages }));
+                } catch (e) {
+                    next(e);
+                }
+            })
+            .catch((err) => next(err));
+    });
+
+    server.get('/api/hiscores', (req, res, next) => {
+        const username =
+            typeof req.query.username === 'string'
+                ? req.query.username.toLowerCase()
+                : undefined;
+
+        if (!username) {
+            return next();
+        }
+
+        res.setHeader('content-type', 'application/json');
+
+        getPlayerRanks(username)
+            .then(({ ranks }) => {
+                if (!ranks) {
+                    getPlayerRanks.delete(username);
+                }
+
+                try {
+                    res.end(JSON.stringify({ ranks }));
                 } catch (e) {
                     next(e);
                 }

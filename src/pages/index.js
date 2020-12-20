@@ -45,15 +45,19 @@ export default function Home() {
         <div>
             <Header />
             <Container>
-                <img
-                    className="rsc-logo"
-                    src="./runescape.png"
-                    alt="RuneScape logo"
-                />
-                <p className="rsc-player-count">
-                    There are currently 12345 people playing!
-                </p>
-                <ButtonWheel links={WHEEL_LINKS} />
+                <header>
+                    <img
+                        className="rsc-logo"
+                        src="./runescape.png"
+                        alt="RuneScape logo"
+                    />
+                    <p className="rsc-player-count">
+                        There are currently 12345 people playing!
+                    </p>
+                </header>
+                <main>
+                    <ButtonWheel links={WHEEL_LINKS} />
+                </main>
             </Container>
         </div>
     );

@@ -8,7 +8,8 @@ export default function ArrowLink(props) {
             'rsc-arrow' +
             (props.direction === 'back' ? ' rsc-arrow-back' : '') +
             (props.disabled ? ' rsc-disabled' : ''),
-        ...props
+        ...props,
+        direction: null
     });
 
     return props.href ? <Link href={props.href}>{child}</Link> : child;

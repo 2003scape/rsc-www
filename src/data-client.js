@@ -140,6 +140,13 @@ class DataClient {
         });
     }
 
+    async getPlayerRanks(username) {
+        return await this.sendAndReceive({
+            handler: 'getPlayerRanks',
+            username
+        });
+    }
+
     async authenticate() {
         const result = await this.sendAndReceive({
             handler: 'authenticate',
