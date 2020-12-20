@@ -12,8 +12,9 @@ export default function NotFound() {
             <Container>
                 <PageName pageName={PAGE_TITLE} />
                 <div className="rsc-row">
-                    <div className="rsc-col-75 rsc-box" style={{ alignSelf: 'center' }}>
+                    <div className="rsc-col rsc-col-75 rsc-box">
                         <p>Nothing interesting happens.</p>
+                        <p>Page not found.</p>
                     </div>
                 </div>
             </Container>

@@ -12,7 +12,6 @@ import Router, { useRouter } from 'next/router';
 import SkillIcon from '../../../components/skill-icon';
 import SkillList from '../../../components/skill-list';
 import { formatUsername } from '../../../username';
-import { useState } from 'react';
 
 const PAGE_TITLE = 'RuneScape Hiscores';
 const SKILL_NAMES = new Set(['overall'].concat(skillNames));
@@ -74,7 +73,9 @@ export default function HiscoreSkills(props) {
             <Container>
                 <PageName pageName={PAGE_TITLE} />
                 <div className="rsc-row">
-                    <aside className="rsc-col rsc-col-36">
+                    <aside className="rsc-col rsc-col-36"
+                        style={{ alignSelf: 'center' }}
+                    >
                         <h2>Select hiscore table</h2>
                         <SkillList selected={skill} />
                     </aside>
@@ -127,7 +128,7 @@ export async function getServerSideProps({ res, params, query }) {
     const skill = query.skill ? ('' + query.skill).toLowerCase() : 'overall';
 
     if (!SKILL_NAMES.has(skill)) {
-        redirect('/hiscores/skill/overall');
+        redirect(res, '/hiscores/skill/overall');
         return EMPTY_PROPS;
     }
 
@@ -143,7 +144,7 @@ export async function getServerSideProps({ res, params, query }) {
         const { ranks, pages } = await response.json();
 
         if (page > pages) {
-            redirect(`/hiscores/skill/${params.skill}`);
+            redirect(res, `/hiscores/skill/${params.skill}`);
             return EMPTY_PROPS;
         }
 
