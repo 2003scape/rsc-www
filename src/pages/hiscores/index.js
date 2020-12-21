@@ -38,12 +38,11 @@ function getWinner(playerExperience, opponentExperience) {
 
 function WinnerArrow(props) {
     return (
-        <td className="rsc-col-winner">
-            <img
-                src={`./arrow-${props.winner}.png`}
-                alt={WINNER_ALTS[props.winner]}
-            />
-        </td>
+        <img
+            className="rsc-winner-arrow"
+            src={`./arrow-${props.winner}.png`}
+            alt={WINNER_ALTS[props.winner]}
+        />
     );
 }
 
@@ -74,11 +73,7 @@ function SkillRow(props) {
             key={props.key}
             onMouseOver={onMouseOver}
         >
-            <td
-                className={`rsc-col${
-                    typeof props.winner !== 'undefined' ? '-compare' : ''
-                }-name`}
-            >
+            <td className="rsc-col-name">
                 <Link href={skillURL}>
                     <a className="rsc-link">
                         {icon}
@@ -95,9 +90,70 @@ function SkillRow(props) {
                     ? props.experience.toLocaleString()
                     : '-'}
             </td>
-            {typeof props.winner !== 'undefined'
-                ? WinnerArrow({ winner: props.winner })
-                : ''}
+        </tr>
+    );
+}
+
+function CompareRow(props) {
+    const { skill, username, opponentName, key } = props;
+
+    const { level, experience, rank } = props.rank;
+
+    const {
+        level: opponentLevel,
+        experience: opponentExperience,
+        rank: opponentRank
+    } = props.opponentRank;
+
+    const icon = skill !== 'overall' ? <SkillIcon name={skill} /> : '';
+    const formattedSkillName = skill[0].toUpperCase() + skill.slice(1);
+    const skillURL =
+        `/hiscores/skill/${skill}?name=${username.toLowerCase()}&rank=` +
+        `${rank}#ranks`;
+
+    const opponentSkillURL =
+        `/hiscores/skill/${skill}?name=${opponentName.toLowerCase()}&rank=` +
+        `${opponentRank}#ranks`;
+
+    return (
+        <tr key={key}>
+            <td className="rsc-col-compare-name">
+                <Link href={skillURL}>
+                    <a className="rsc-link">
+                        {icon}
+                        {formattedSkillName}
+                    </a>
+                </Link>
+            </td>
+            <td className="rsc-col-compare-rank">{rank || '-'}</td>
+            <td className="rsc-col-compare-level">
+                {level ? level.toLocaleString() : '-'}
+            </td>
+            <td className="rsc-col-compare-xp">
+                {typeof experience === 'number'
+                    ? experience.toLocaleString()
+                    : '-'}
+            </td>
+            <td className="rsc-col-compare-winner">
+                <WinnerArrow
+                    winner={getWinner(experience, opponentExperience)}
+                />
+            </td>
+            <td className="rsc-col-compare-name">
+                <Link href={opponentSkillURL}>
+                    <a className="rsc-link">
+                        {icon}
+                        {formattedSkillName}
+                    </a>
+                </Link>
+            </td>
+            <td className="rsc-col-compare-rank">{opponentRank}</td>
+            <td className="rsc-col-compare-level">{opponentLevel}</td>
+            <td className="rsc-col-compare-xp">
+                {typeof opponentExperience === 'number'
+                    ? opponentExperience.toLocaleString()
+                    : '-'}
+            </td>
         </tr>
     );
 }
@@ -153,32 +209,14 @@ export default function Hiscores(props) {
             </main>
         );
     } else if (ranks && opponentRanks) {
-        const [highlightedRow, setHighlightedRow] = useState(-1);
-        const clearHighlightedRow = () => setHighlightedRow(-1);
-
-        const userSkillRows = Array.from(skillNames).map((name, i) => {
-            return new SkillRow({
-                ...ranks[name],
+        const compareRows = Array.from(skillNames).map((name, i) => {
+            return new CompareRow({
+                skill: name,
                 username,
-                name,
-                winner: getWinner(
-                    ranks[name].experience,
-                    opponentRanks[name].experience
-                ),
-                key: i,
-                highlightedRow,
-                setHighlightedRow
-            });
-        });
-
-        const opponentSkillRows = Array.from(skillNames).map((name, i) => {
-            return new SkillRow({
-                ...opponentRanks[name],
-                username,
-                name,
-                key: i + skillNames.size,
-                highlightedRow,
-                setHighlightedRow
+                opponentName,
+                rank: ranks[name],
+                opponentRank: opponentRanks[name],
+                key: i
             });
         });
 
@@ -195,58 +233,38 @@ export default function Hiscores(props) {
                     </Link>
                 </h2>
                 <div className="rsc-box rsc-hiscores-compare-box">
-                    <div>
-                        <div
-                            className="rsc-table rsc-hiscores-table rsc-compare-table"
-                            style={{ float: 'left' }}
-                            onMouseOut={clearHighlightedRow}
-                        >
-                            <table id="user-table">
-                                <thead>
-                                    <tr>
-                                        <th className="rsc-col-compare-name">
-                                            Skill
-                                        </th>
-                                        <th className="rsc-col-rank">Rank</th>
-                                        <th
-                                            className="rsc-col-level"
-                                            style={{ textAlign: 'right' }}
-                                        >
-                                            Level
-                                        </th>
-                                        <th className="rsc-col-xp">XP</th>
-                                        <th className="rsc-col-winner">
-                                            &nbsp;
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>{userSkillRows}</tbody>
-                            </table>
-                        </div>
-                        <div
-                            className="rsc-table rsc-hiscores-table"
-                            style={{ float: 'right', width: '45%' }}
-                            onMouseOut={clearHighlightedRow}
-                        >
-                            <table id="opponent-table">
-                                <thead>
-                                    <tr>
-                                        <th className="rsc-col-name">Skill</th>
-                                        <th className="rsc-col-rank">Rank</th>
-                                        <th
-                                            className="rsc-col-level"
-                                            style={{ textAlign: 'right' }}
-                                        >
-                                            Level
-                                        </th>
-                                        <th className="rsc-col-xp">XP</th>
-                                    </tr>
-                                </thead>
-                                <tbody>{opponentSkillRows}</tbody>
-                            </table>
-                        </div>
+                    <div className="rsc-table rsc-hiscores-table rsc-compare-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th className="rsc-col-compare-name">
+                                        Skill
+                                    </th>
+                                    <th className="rsc-col-compare-rank">
+                                        Rank
+                                    </th>
+                                    <th className="rsc-col-compare-level">
+                                        Level
+                                    </th>
+                                    <th className="rsc-col-compare-xp">XP</th>
+                                    <th className="rsc-col-compare-winner">
+                                        &nbsp;
+                                    </th>
+                                    <th className="rsc-col-compare-name">
+                                        Skill
+                                    </th>
+                                    <th className="rsc-col-compare-rank">
+                                        Rank
+                                    </th>
+                                    <th className="rsc-col-compare-level">
+                                        Level
+                                    </th>
+                                    <th className="rsc-col-compare-xp">XP</th>
+                                </tr>
+                            </thead>
+                            <tbody>{compareRows}</tbody>
+                        </table>
                     </div>
-                    <div style={{ clear: 'both' }} />
                 </div>
             </main>
         );

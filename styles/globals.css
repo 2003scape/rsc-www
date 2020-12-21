@@ -53,7 +53,7 @@ h6 {
     background: url(../public/border-left.png) repeat-y,
         url(../public/border-right.png) repeat-y,
         /*url(../public/christmas-background.jpg) repeat;*/
-        url(../public/background.png) repeat;
+            url(../public/background.png) repeat;
     background-position: 0 43px, right 43px;
     margin: 20px auto 0 auto;
     max-width: 816px;
@@ -71,7 +71,7 @@ h6 {
     background-color: #000;
     border: 2px solid #382418;
     box-sizing: border-box;
-    margin: auto auto 8px auto;
+    margin: 8px auto 8px auto;
     outline: 2px solid #000;
     padding: 4px;
 }
@@ -90,10 +90,15 @@ h6 {
 }
 
 .rsc-header {
+    margin-top: 0;
     margin-left: auto;
     margin-right: auto;
     min-width: 250px;
     width: 40%;
+}
+
+.rsc-hiscores-compare-box {
+    overflow-x: auto;
 }
 
 .rsc-footer {
@@ -147,6 +152,11 @@ h6 {
 .rsc-col-64 {
     width: 64%;
     padding: 0 4% 0 4%;
+}
+
+.rsc-col-75 {
+    width: 75%;
+    padding: 0 2% 0 2%;
 }
 
 .rsc-col-50 {
@@ -420,41 +430,61 @@ h6 {
 
 /* hiscores */
 
-.rsc-hiscores-skills ul {
+.rsc-skill-list ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.rsc-hiscores-skills li {
+.rsc-skill-list li {
     margin: 0;
     width: 100%;
 }
 
-.rsc-hiscores-skills li a {
+.rsc-skill-list li a {
     display: inline-block;
     width: 100%;
-    padding: 2px 0 2px 0;
+    padding: 4px 0 4px 0;
 }
 
-.rsc-hiscores-ranks {
+.rsc-hiscores-table {
     text-align: left;
 }
 
-.rsc-hiscores-ranks table {
-    border-collapse: separate;
-    border-spacing: 8px 0;
+.rsc-hiscores-table tbody tr:nth-child(odd) {
+    background-color: #1e1e1e;
+}
+
+.rsc-hiscores-table tbody tr:hover, tbody .rsc-hover-row {
+    background-color: #333 !important;
+}
+
+.rsc-hiscores-table th {
+    background-color: #000;
+}
+
+.rsc-hiscores-table table {
+    border-collapse: collapse;
     margin: 4px auto 4px auto;
     table-layout: fixed;
     width: 100%;
 }
 
-.rsc-hiscores-ranks td {
-    padding: 0;
+.rsc-hiscores-table td, .rsc-hiscores-table th {
+    padding: 0 4px 0 4px;
 }
 
-.rsc-hiscores-ranks td * {
+.rsc-hiscores-table td * {
     padding: 2px 0 2px 0;
+    text-align: inherit;
+}
+
+.rsc-highlight-row {
+    background-color: #486020 !important;
+}
+
+.rsc-highlight-row .rsc-link {
+    color: #fff;
 }
 
 .rsc-col-rank {
@@ -462,12 +492,19 @@ h6 {
     width: 16%;
 }
 
-.rsc-col-name {
-    width: 38%;
+.rsc-col-name, .rsc-col-compare-name {
     word-wrap: break-word;
 }
 
-.rsc-col-name a {
+.rsc-col-name {
+    width: 38%;
+}
+
+.rsc-col-name, .rsc-col-compare-name {
+    height: 24px;
+}
+
+.rsc-col-name a, .rsc-col-compare-name a {
     display: inline-block;
     width: 100%;
 }
@@ -482,8 +519,31 @@ h6 {
     word-wrap: break-word;
 }
 
-/* client page */
+.rsc-compare-table {
+    min-width: 482px;
+}
 
+.rsc-col-compare-name {
+    width: 24%;
+}
+
+.rsc-col-compare-rank, .rsc-col-compare-level {
+    width: 6%;
+}
+
+.rsc-col-compare-xp {
+    text-align: right;
+    width: 15%;
+}
+
+.rsc-col-compare-winner {
+    text-align: center;
+    width: 4%;
+    padding: 0 !important;
+    text-align: center;
+}
+
+/* client page */
 .rsc-client-wrap {
     margin: 0 auto 0 auto;
 }
@@ -523,7 +583,26 @@ h6 {
     outline: 0;
 }
 
+.rsc-winner-arrow {
+    max-width: 100%;
+    height: auto;
+}
+
 @media (max-width: 540px) {
+    body {
+        font-size: 14px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+
     .rsc-container {
         background-size: 10% auto, 10% auto, auto auto;
     }
@@ -535,7 +614,8 @@ h6 {
 
     .rsc-box,
     .rsc-stone-box {
-        margin-bottom: 16px;
+        margin-top: 8px;
+        margin-bottom: 8px;
     }
 
     .rsc-scroll {
@@ -569,7 +649,7 @@ h6 {
 
     /* give the hiscores a bit more space */
 
-    .rsc-hiscores-ranks table {
+    .rsc-hiscores-table table {
         width: 100%;
     }
 
@@ -602,17 +682,30 @@ h6 {
 
     /* stack our columns */
     .rsc-col {
-        padding-left: 4%;
-        padding-right: 4%;
+        padding-left: 0%;
+        padding-right: 0%;
         width: 100%;
     }
 
-    .rsc-hiscores-ranks td * {
-        padding: 4px 0 4px 0;
+    .rsc-hiscores-table td * {
+        padding: 6px 0 6px 0;
+        font-size: 13px;
     }
 
-    .rsc-hiscores-skills li a {
-        padding: 4px 0 4px 0;
+    .rsc-skill-list li a {
+        padding: 6px 0 6px 0;
+    }
+
+    td.rsc-col-name, td.rsc-col-compare-name {
+        height: 48px;
+    }
+
+    .rsc-col-compare-name a {
+        line-height: 48px;
+    }
+
+    .rsc-compare-table {
+        min-width: 682px;
     }
 }
 

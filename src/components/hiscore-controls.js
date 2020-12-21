@@ -55,7 +55,7 @@ function NameSearch(props) {
 
 function NameCompare(props) {
     return (
-        <HiscoreInputWrap onSubmit={props.onSubmit} action="/hiscores/compare">
+        <HiscoreInputWrap onSubmit={props.onSubmit} action="/hiscores">
             <label htmlFor="rsc-search-name-compare">Compare users</label>
             <input
                 className="rsc-input"
