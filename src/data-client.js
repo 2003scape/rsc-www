@@ -147,6 +147,13 @@ class DataClient {
         });
     }
 
+    async getNews(query) {
+        return await this.sendAndReceive({
+            handler: 'getNews',
+            ...query
+        });
+    }
+
     async authenticate() {
         const result = await this.sendAndReceive({
             handler: 'authenticate',

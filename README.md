@@ -1,5 +1,5 @@
 # rsc-www
-modern recreation of the
+modern, mobile-friendly recreation of the
 [runescape classic](https://classic.runescape.wiki/w/RuneScape_Classic)
 website. built using [nextjs](https://nextjs.org/) and
 [express](https://expressjs.com/).

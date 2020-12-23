@@ -1,5 +1,6 @@
 import Router, { useRouter } from 'next/router';
-import { USERNAME_REGEX, formatUsername } from '../username';
+import UsernameInput from './username-input';
+import { formatUsername } from '../username';
 
 function HiscoreInputWrap(props) {
     return (
@@ -21,10 +22,10 @@ function RankSearch(props) {
 
     return (
         <HiscoreInputWrap onSubmit={props.onSubmit} action={action}>
-            <label htmlFor="rsc-search-rank">Search by rank</label>
+            <label htmlFor="search-rank">Search by rank</label>
             <input
                 className="rsc-input"
-                id="rsc-search-rank"
+                id="search-rank"
                 name="rank"
                 type="number"
                 min="1"
@@ -38,15 +39,10 @@ function RankSearch(props) {
 function NameSearch(props) {
     return (
         <HiscoreInputWrap onSubmit={props.onSubmit} action="/hiscores">
-            <label htmlFor="rsc-search-name">Search by name</label>
-            <input
-                className="rsc-input"
-                id="rsc-search-name"
+            <label htmlFor="search-name">Search by name</label>
+            <UsernameInput
+                id="search-name"
                 name="name"
-                type="text"
-                required={true}
-                pattern={USERNAME_REGEX}
-                maxLength="12"
                 defaultValue={props.username}
             />
         </HiscoreInputWrap>
@@ -56,26 +52,15 @@ function NameSearch(props) {
 function NameCompare(props) {
     return (
         <HiscoreInputWrap onSubmit={props.onSubmit} action="/hiscores">
-            <label htmlFor="rsc-search-name-compare">Compare users</label>
-            <input
-                className="rsc-input"
-                id="rsc-search-name-compare"
+            <label htmlFor="search-name-compare">Compare users</label>
+            <UsernameInput
+                id="search-name-compare"
                 name="name"
-                type="text"
-                required={true}
-                pattern={USERNAME_REGEX}
-                maxLength="12"
                 defaultValue={props.username}
             />
-            <input
-                className="rsc-input"
-                id="rsc-search-opponent"
-                aria-label="Opponent username"
+            <UsernameInput
                 name="opponent"
-                type="text"
-                required={true}
-                pattern={USERNAME_REGEX}
-                maxLength="12"
+                aria-label="Opponent username"
                 defaultValue={props.opponent}
             />
         </HiscoreInputWrap>

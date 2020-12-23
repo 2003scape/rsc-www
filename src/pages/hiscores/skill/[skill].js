@@ -65,7 +65,7 @@ export default function HiscoreSkills(props) {
         playerRows.push(RankRow({ key: i }));
     }
 
-    const icon = skill !== 'overall' ? <SkillIcon name={skill} /> : '';
+    const icon = skill !== 'overall' ? <SkillIcon name={skill} /> : undefined;
 
     return (
         <div>
@@ -136,8 +136,8 @@ export async function getServerSideProps({ res, params, query }) {
     const rank = query.rank ? query.rank : -1;
 
     const response = await fetch(
-        `http://localhost:1338/api/hiscores/skill/${params.skill}` +
-            `?page=${page}&rank=${rank}`
+        `${process.env.url}api/hiscores/skill/${params.skill}?page=${page}` +
+        `&rank=${rank}`
     );
 
     if (response.ok) {

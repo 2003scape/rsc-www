@@ -12,8 +12,7 @@ import HiscoreSkills from './skill/[skill]';
 import Link from 'next/link';
 import PageName from '../../components/page-name';
 import SkillIcon from '../../components/skill-icon';
-import { USERNAME_REGEX, formatUsername } from '../../username';
-import { useState } from 'react';
+import { formatUsername } from '../../username';
 
 const PAGE_TITLE = 'RuneScape Hiscores';
 const EMPTY_SKILL_PROPS = { props: { ranks: [], pages: 0 } };
@@ -287,7 +286,7 @@ export default function Hiscores(props) {
     );
 }
 
-export async function getServerSideProps({ res, query }) {
+export async function getServerSideProps({ query }) {
     let username = query.name;
 
     if (username) {
@@ -297,7 +296,7 @@ export async function getServerSideProps({ res, query }) {
         const props = { props: { username, opponent, ranks: null } };
 
         const response = await fetch(
-            `http://localhost:1338/api/hiscores?username=${username}`
+            `${process.env.url}api/hiscores?username=${username}`
         );
 
         if (response.ok) {
@@ -314,7 +313,7 @@ export async function getServerSideProps({ res, query }) {
             }
 
             const response = await fetch(
-                `http://localhost:1338/api/hiscores?username=${opponent}`
+                `${process.env.url}api/hiscores?username=${opponent}`
             );
 
             if (response.ok) {
@@ -327,7 +326,7 @@ export async function getServerSideProps({ res, query }) {
     }
 
     const response = await fetch(
-        'http://localhost:1338/api/hiscores/skill/overall'
+        `${process.env.url}api/hiscores/skill/overall`
     );
 
     if (response.ok) {

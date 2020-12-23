@@ -3,6 +3,15 @@ const memoize = require('memoizee');
 const skillNames = new Set(require('@2003scape/rsc-data/skill-names'));
 skillNames.add('overall');
 
+const NEWS_KEYS = [
+    'id',
+    'terms',
+    'page',
+    'category',
+    'before',
+    'after'
+];
+
 const MEMOIZE_OPTIONS = {
     maxAge: 1000 * 60 * 5,
     promise: true,
@@ -17,6 +26,11 @@ function applyAPI(server, dataClient) {
 
     const getPlayerRanks = memoize(
         dataClient.getPlayerRanks.bind(dataClient),
+        MEMOIZE_OPTIONS
+    );
+
+    const getNews = memoize(
+        dataClient.getNews.bind(dataClient),
         MEMOIZE_OPTIONS
     );
 
@@ -72,6 +86,31 @@ function applyAPI(server, dataClient) {
 
                 try {
                     res.end(JSON.stringify({ ranks }));
+                } catch (e) {
+                    next(e);
+                }
+            })
+            .catch((err) => next(err));
+    });
+
+    server.get('/api/news', (req, res, next) => {
+        const query = {};
+        NEWS_KEYS.forEach((key) => query[key] = req.query[key]);
+
+        if (query.terms) {
+            query.terms = query.terms.slice(0, 140);
+        }
+
+        res.setHeader('content-type', 'application/json');
+
+        getNews(query)
+            .then(({ articles }) => {
+                if (!articles.length) {
+                    getNews.delete(query);
+                }
+
+                try {
+                    res.end(JSON.stringify({ articles }));
                 } catch (e) {
                     next(e);
                 }

@@ -1,4 +1,7 @@
 module.exports = {
+    env: {
+        url: 'http://localhost:1338/'
+    },
     async redirects() {
         return [
             {
