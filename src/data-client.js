@@ -154,6 +154,13 @@ class DataClient {
         });
     }
 
+    async getFile(name) {
+        return await this.sendAndReceive({
+            handler: 'getFile',
+            name
+        });
+    }
+
     async authenticate() {
         const result = await this.sendAndReceive({
             handler: 'authenticate',

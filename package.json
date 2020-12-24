@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
     "start": "./src/bin.js | garnish"
   },
@@ -14,15 +13,14 @@
     "express": "^4.17.1",
     "isomorphic-fetch": "^3.0.0",
     "json-socket": "^0.3.0",
+    "markdown-it": "^12.0.4",
     "memoizee": "^0.4.14",
+    "mime-types": "^2.1.27",
     "next": "10.0.3",
     "rand-token": "^1.0.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "rehype-stringify": "^8.0.0",
-    "remark-parse": "^9.0.0",
-    "remark-rehype": "^8.0.0",
-    "unified": "^9.2.0",
+    "slug": "^4.0.2",
     "yargs": "^16.2.0"
   },
   "description": "modern, mobile-friendly recreation of the runescape classic website",

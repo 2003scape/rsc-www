@@ -67,7 +67,7 @@ export default function Container(props) {
                                 <a
                                     className="rsc-link"
                                     title="Log into or create a RuneScape account."
-                                    style={{ lineHeight: '24px' }}
+                                    style={{ lineHeight: '16px' }}
                                 >
                                     Login
                                 </a>
@@ -84,7 +84,8 @@ export default function Container(props) {
                 <a className="rsc-link" href="https://github.com/2003scape">
                     2003scape source code
                 </a>
-                &nbsp; - Licensed under the&nbsp;
+                &nbsp;copyright {new Date().getFullYear()} and licensed
+                under the &nbsp;
                 <a
                     className="rsc-link"
                     href="https://www.gnu.org/licenses/agpl-3.0.html"

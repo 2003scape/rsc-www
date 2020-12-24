@@ -158,6 +158,7 @@ hr {
 .rsc-header-box {
     text-align: right;
     margin-bottom: 16px;
+    padding: 4px 8px 4px 8px;
 }
 
 .rsc-inline-links ul {
@@ -185,11 +186,11 @@ hr {
 }
 
 .rsc-social-links li {
-    margin: 0 16px 0 0;
+    margin: 0 8px 0 0;
 }
 
 .rsc-inline-links img {
-    width: 24px;
+    width: 16px;
 }
 
 .rsc-hiscores-compare-box {
@@ -455,6 +456,7 @@ hr {
 .rsc-arrow-wrap {
     margin: 2px auto 2px auto;
     padding: 0 32px 0 32px;
+    max-width: 398px;
 }
 
 .rsc-disabled {
@@ -702,7 +704,7 @@ hr {
 
 .rsc-news-head {
     border-bottom: 2px solid #1e1e1e;
-    padding-bottom: 4px;
+    padding: 8px;
 }
 
 .rsc-category-link {
@@ -727,6 +729,29 @@ hr {
 .rsc-article-date {
     justify-content: center;
     align-self: center;
+}
+
+.rsc-article-box {
+    text-align: left;
+    padding: 8px;
+}
+
+.rsc-article-box img {
+    margin: 8px 0 8px 0;
+    max-width: 100%;
+}
+
+.rsc-article-box h1:first-child {
+    text-align: center;
+}
+
+.rsc-article-box a {
+    text-decoration: none;
+    color: #90c040;
+}
+
+.rsc-article-box a:hover {
+    text-decoration: underline;
 }
 
 @media (max-width: 540px) {
@@ -852,17 +877,12 @@ hr {
 
     .rsc-header-box {
         text-align: center;
-        padding: 8px;
+        padding: 4px;
     }
 
     .rsc-social-links {
         float: none;
-        margin-top: 8px;
-        margin-bottom: 16px;
-    }
-
-    .rsc-social-links li {
-        margin-right: 8px;
+        margin-bottom: 8px;
     }
 
     .rsc-inline-links img {
@@ -875,6 +895,16 @@ hr {
 
     .rsc-news-head {
         display: none;
+    }
+
+    .rsc-article-category::before {
+        content: 'Category:';
+        margin-right: 4px;
+    }
+
+    .rsc-article-date::before {
+        content: 'Date:';
+        margin-right: 4px;
     }
 }
 

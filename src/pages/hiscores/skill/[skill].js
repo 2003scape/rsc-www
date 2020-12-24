@@ -16,7 +16,6 @@ import { formatUsername } from '../../../username';
 const PAGE_TITLE = 'RuneScape Hiscores';
 const SKILL_NAMES = new Set(['overall'].concat(skillNames));
 const RANKS_PER_PAGE = 16;
-const EMPTY_PROPS = { props: { ranks: [], pages: 0 } };
 
 function RankRow(props = {}) {
     return (
@@ -48,7 +47,11 @@ function RankRow(props = {}) {
 export default function HiscoreSkills(props) {
     const router = useRouter();
     const skill = router.query.skill || 'overall';
-    const page = !Number.isNaN(+router.query.page) ? +router.query.page : 1;
+
+    const page = !Number.isNaN(+router.query.page)
+        ? parseInt(router.query.page, 10)
+        : 1;
+
     const rank = +(router.query.rank || -1);
     const formattedSkillName = skill[0].toUpperCase() + skill.slice(1);
     const pageTitle = `${PAGE_TITLE} for ${formattedSkillName}`;
@@ -73,7 +76,8 @@ export default function HiscoreSkills(props) {
             <Container>
                 <PageName pageName={PAGE_TITLE} />
                 <div className="rsc-row">
-                    <aside className="rsc-col rsc-col-36"
+                    <aside
+                        className="rsc-col rsc-col-36"
                         style={{ alignSelf: 'center' }}
                     >
                         <h2>Select hiscore table</h2>
@@ -104,7 +108,7 @@ export default function HiscoreSkills(props) {
                             </table>
                             <PaginationArrows
                                 url={`/hiscores/skill/${skill}`}
-                                hash="ranks"
+                                postURL="#ranks"
                                 page={page}
                                 totalPages={props.pages}
                             />
@@ -129,7 +133,7 @@ export async function getServerSideProps({ res, params, query }) {
 
     if (!SKILL_NAMES.has(skill)) {
         redirect(res, '/hiscores/skill/overall');
-        return EMPTY_PROPS;
+        return { notFound: true };
     }
 
     const page = query.page ? query.page : 1;
@@ -137,7 +141,7 @@ export async function getServerSideProps({ res, params, query }) {
 
     const response = await fetch(
         `${process.env.url}api/hiscores/skill/${params.skill}?page=${page}` +
-        `&rank=${rank}`
+            `&rank=${rank}`
     );
 
     if (response.ok) {
@@ -145,11 +149,11 @@ export async function getServerSideProps({ res, params, query }) {
 
         if (page > pages) {
             redirect(res, `/hiscores/skill/${params.skill}`);
-            return EMPTY_PROPS;
+            return { notFound: true };
         }
 
         return { props: { ranks, pages } };
     }
 
-    return EMPTY_PROPS;
+    return { notFound: true };
 }

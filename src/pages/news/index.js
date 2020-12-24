@@ -1,7 +1,11 @@
+const slug = require('slug');
+
 import Container from '../../components/container';
 import Header from '../../components/header';
 import Link from 'next/link';
 import PageName from '../../components/page-name';
+import PaginationArrows from '../../components/pagination-arrows';
+import Router, { useRouter } from 'next/router';
 
 const PAGE_TITLE = 'Latest News';
 
@@ -24,9 +28,9 @@ function CategoryLink(props) {
     return (
         <Link href={`/news?category=${props.id}`}>
             <a
-                className={`rsc-category-link rsc-${colour}-text${
-                    props.selected ? ' rsc-strong-text' : ''
-                }`}
+                className={`${
+                    props.className || ''
+                } rsc-category-link rsc-${colour}-text`}
             >
                 {name}
             </a>
@@ -41,10 +45,11 @@ function CategoryLinks(props) {
         <nav className="rsc-inline-links rsc-category-links">
             <ul aria-label="Choose a news category">
                 {CATEGORY_IDS.map((id, i) => {
-                    console.log(selected, id);
+                    const className = selected === id ? 'rsc-strong-text' : '';
+
                     return (
                         <li key={i}>
-                            <CategoryLink selected={selected === id} id={id} />
+                            <CategoryLink className={className} id={id} />
                         </li>
                     );
                 })}
@@ -54,43 +59,82 @@ function CategoryLinks(props) {
 }
 
 function NewsArticle(props, i) {
+    const articleURL =`/news/article/${slug(props.title)}/${props.id}`;
+
     return (
-        <>
-            {i !== 0 ? <hr /> : undefined}
+        <div key={i}>
             <article className="rsc-row">
-                <span className="rsc-col rsc-col-25 rsc-article-category">
-                    <CategoryLink id={props.category + 1} />
-                </span>
+                <CategoryLink
+                    className="rsc-col rsc-col-25 rsc-article-category"
+                    id={props.category + 1}
+                />
                 <div className="rsc-col rsc-col-50 rsc-left-text">
-                    <Link href={`/news/article/${props.id}`}>
+                    <Link href={articleURL}>
                         <a className="rsc-link">
                             <h2 style={{ marginTop: '8px' }}>{props.title}</h2>
                         </a>
                     </Link>
                     <p>
                         {props.summary.trim()}...&nbsp;
-                        <Link href={`/news/article/${props.id}`}>
+                        <Link href={articleURL}>
                             <a className="rsc-link">Read more</a>
                         </Link>
                     </p>
                 </div>
                 <time className="rsc-col rsc-col-25 rsc-right-text rsc-article-date">
                     {new Date(props.date * 1000)
-                        .toLocaleString('en-UK', {
+                        .toLocaleString('en-gb', {
                             year: 'numeric',
                             month: 'short',
                             day: 'numeric'
                         })
-                        .replace(/ /g, '-')}
+                        .replace(/ /g, '-')
+                        .replace(/,/g, '')}
                 </time>
             </article>
-        </>
+            <hr />
+        </div>
     );
 }
 
 export default function News(props) {
-    const selected = 1;
+    const router = useRouter();
     const articles = props.articles;
+
+    const page = !Number.isNaN(+router.query.page)
+        ? parseInt(router.query.page, 10)
+        : 1;
+
+    const selectedCategory = !Number.isNaN(+router.query.category)
+        ? parseInt(router.query.category, 10)
+        : 0;
+
+    const content = articles.length ? (
+        <div>
+            <div className="rsc-row rsc-news-head">
+                <strong className="rsc-col rsc-col-25 rsc-left-text">
+                    Category
+                </strong>
+                <strong className="rsc-col rsc-col-50 rsc-left-text">
+                    Article
+                </strong>
+                <strong className="rsc-col rsc-col-25 rsc-right-text">
+                    Date
+                </strong>
+            </div>
+            {articles.map(NewsArticle)}
+            <br />
+            <PaginationArrows
+                url={`/news`}
+                page={page}
+                totalPages={10}
+                hash={`&category=${selectedCategory}`}
+            />
+            <br />
+        </div>
+    ) : (
+        <p>No articles found</p>
+    );
 
     return (
         <div>
@@ -102,23 +146,12 @@ export default function News(props) {
                         <div className="rsc-row">
                             <div className="rsc-col rsc-col-75">
                                 <br />
-                                <CategoryLinks selected={selected} />
+                                <CategoryLinks selected={selectedCategory} />
                                 <br />
                             </div>
                         </div>
                         <div className="rsc-box rsc-news-box">
-                            <div className="rsc-row rsc-news-head">
-                                <strong className="rsc-col rsc-col-25 rsc-left-text">
-                                    Category
-                                </strong>
-                                <strong className="rsc-col rsc-col-50 rsc-left-text">
-                                    Article
-                                </strong>
-                                <strong className="rsc-col rsc-col-25 rsc-right-text">
-                                    Date
-                                </strong>
-                            </div>
-                            {articles.map(NewsArticle)}
+                            {content}
                         </div>
                     </div>
                 </div>
@@ -128,12 +161,15 @@ export default function News(props) {
 }
 
 export async function getServerSideProps({ query }) {
-    const response = await fetch(`${process.env.url}api/news`);
+    const response = await fetch(
+        `${process.env.url}api/news?page=${query.page || -1}` +
+            `&category=${query.category || -1}`
+    );
 
     if (response.ok) {
         const { articles } = await response.json();
         return { props: { articles } };
     }
 
-    return { props: { articles: [] } };
+    return { notFound: true };
 }

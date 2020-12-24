@@ -1,15 +1,16 @@
 const memoize = require('memoizee');
+const mime = require('mime');
 
 const skillNames = new Set(require('@2003scape/rsc-data/skill-names'));
 skillNames.add('overall');
 
 const NEWS_KEYS = [
     'id',
-    'terms',
     'page',
-    'category',
+    'category'
+    /*'terms',
     'before',
-    'after'
+    'after'*/
 ];
 
 const MEMOIZE_OPTIONS = {
@@ -33,6 +34,11 @@ function applyAPI(server, dataClient) {
         dataClient.getNews.bind(dataClient),
         MEMOIZE_OPTIONS
     );
+
+    const getFile = memoize(dataClient.getFile.bind(dataClient), {
+        promise: true,
+        primitive: true
+    });
 
     server.get('/api/hiscores/skill/:skill', (req, res, next) => {
         const skill = req.params.skill.toLowerCase();
@@ -95,11 +101,18 @@ function applyAPI(server, dataClient) {
 
     server.get('/api/news', (req, res, next) => {
         const query = {};
-        NEWS_KEYS.forEach((key) => query[key] = req.query[key]);
+        NEWS_KEYS.forEach((key) => (query[key] = req.query[key]));
 
         if (query.terms) {
             query.terms = query.terms.slice(0, 140);
         }
+
+        query.page = query.page ? parseInt(query.page, 10) - 1 : -1;
+
+        query.category =
+            typeof query.category !== 'undefined'
+                ? parseInt(query.category, 10)
+                : -1;
 
         res.setHeader('content-type', 'application/json');
 
@@ -114,6 +127,24 @@ function applyAPI(server, dataClient) {
                 } catch (e) {
                     next(e);
                 }
+            })
+            .catch((err) => next(err));
+    });
+
+    server.get('/images/:name', (req, res, next) => {
+        const name = req.params.name;
+
+        getFile(name)
+            .then((file) => {
+                if (!file || !file.file) {
+                    getFile.delete(name);
+                    return next();
+                }
+
+                file = file.file;
+
+                res.setHeader('content-type', mime.lookup(name));
+                res.end(Buffer.from(file, 'base64'));
             })
             .catch((err) => next(err));
     });

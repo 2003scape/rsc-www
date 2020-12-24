@@ -1,12 +1,12 @@
 import ArrowLink from './arrow-link';
 
-export default function PaginationArrows({ url, hash, page, totalPages }) {
-    hash = hash ? `#${hash}` : '';
+export default function PaginationArrows({ url, postURL, page, totalPages }) {
+    postURL = postURL || '';
 
-    const backHref = page > 1 ? `${url}?page=${page - 1}${hash}` : undefined;
+    const backHref = page > 1 ? `${url}?page=${page - 1}${postURL}` : undefined;
 
     const nextHref =
-        page < totalPages ? `${url}?page=${page + 1}${hash}` : undefined;
+        page < totalPages ? `${url}?page=${page + 1}${postURL}` : undefined;
 
     return (
         <div className="rsc-arrow-wrap">

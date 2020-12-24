@@ -57,6 +57,7 @@ export default function Home() {
                 </header>
                 <main>
                     <ButtonWheel links={WHEEL_LINKS} />
+                    <br />
                 </main>
             </Container>
         </div>

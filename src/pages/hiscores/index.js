@@ -15,7 +15,6 @@ import SkillIcon from '../../components/skill-icon';
 import { formatUsername } from '../../username';
 
 const PAGE_TITLE = 'RuneScape Hiscores';
-const EMPTY_SKILL_PROPS = { props: { ranks: [], pages: 0 } };
 
 const WINNER_ALTS = {
     winner: 'Green arrow facing upwards',
@@ -52,26 +51,9 @@ function SkillRow(props) {
     const username = props.username.toLowerCase();
     const rank = props.rank;
     const skillURL = `/hiscores/skill/${name}?name=${username}&rank=${rank}#ranks`;
-    const { setHighlightedRow, highlightedRow } = props;
-
-    let onMouseOver;
-
-    if (setHighlightedRow) {
-        onMouseOver = () => {
-            setHighlightedRow(
-                props.key < skillNames.size
-                    ? props.key + skillNames.size
-                    : props.key - skillNames.size
-            );
-        };
-    }
 
     return (
-        <tr
-            className={highlightedRow === props.key ? 'rsc-hover-row' : ''}
-            key={props.key}
-            onMouseOver={onMouseOver}
-        >
+        <tr key={props.key}>
             <td className="rsc-col-name">
                 <Link href={skillURL}>
                     <a className="rsc-link">
@@ -334,5 +316,5 @@ export async function getServerSideProps({ query }) {
         return { props: { ranks, pages } };
     }
 
-    return EMPTY_SKILL_PROPS;
+    return { notFound: true }
 }
