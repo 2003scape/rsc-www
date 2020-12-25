@@ -148,16 +148,19 @@ class DataClient {
     }
 
     async getNews(query) {
-        return await this.sendAndReceive({
-            handler: 'getNews',
-            ...query
-        });
+        return await this.sendAndReceive({ handler: 'getNews', ...query });
     }
 
     async getFile(name) {
+        return await this.sendAndReceive({ handler: 'getFile', name });
+    }
+
+    async login(username, password, ip) {
         return await this.sendAndReceive({
-            handler: 'getFile',
-            name
+            handler: 'webLogin',
+            username,
+            password,
+            ip
         });
     }
 

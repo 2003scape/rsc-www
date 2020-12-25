@@ -2,7 +2,9 @@
 
 const DataClient = require('./data-client');
 const applyAPI = require('./api');
+const bodyParser = require('body-parser');
 const bole = require('bole');
+const cookieSession = require('cookie-session');
 const express = require('express');
 const fs = require('fs').promises;
 const next = require('next');
@@ -10,6 +12,16 @@ const pkg = require('../package');
 const yargs = require('yargs');
 
 const log = bole('bin');
+
+function formatIPAddress(ip) {
+    if (ip === '::1') {
+        return '127.0.0.1';
+    }
+
+    ip = ip.split(':');
+
+    return ip[ip.length - 1];
+}
 
 const argv = yargs
     .scriptName('rsc-www')
@@ -61,6 +73,29 @@ bole.output({
 
     const server = express();
     const handle = app.getRequestHandler();
+
+    server.use(cookieSession({
+        name: 'session',
+        secret: require('./secret')
+    }));
+
+    server.post(
+        '/login',
+        bodyParser.urlencoded({ extended: true }),
+        (req, res, next) => {
+            const ip = formatIPAddress(
+                req.headers['x-forwarded-for'] || req.connection.remoteAddress
+            );
+
+            dataClient
+                .login(req.body.username, req.body.password, ip)
+                .then(({ success, id, rank }) => {
+                    req.errorMessage = 'Invalid username or password.';
+                    handle(req, res, next);
+                })
+                .catch((err) => log.error(err));
+        }
+    );
 
     applyAPI(server, dataClient);
     server.all('*', handle);

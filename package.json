@@ -10,6 +10,7 @@
     "@2003scape/rsc-data": "^1.0.18",
     "body-parser": "^1.19.0",
     "bole": "^4.0.0",
+    "cookie-session": "^1.4.0",
     "express": "^4.17.1",
     "isomorphic-fetch": "^3.0.0",
     "json-socket": "^0.3.0",

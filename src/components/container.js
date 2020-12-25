@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { UserContext } from '../contexts/user';
+import { useContext } from 'react';
 
 const SOCIAL_LINKS = [
     {
@@ -55,6 +57,8 @@ function SocialLinks(props) {
 }
 
 export default function Container(props) {
+    const { user } = useContext(UserContext);
+
     return (
         <div className="rsc-container">
             <div className="rsc-border-top rsc-border-bar"></div>
@@ -72,6 +76,7 @@ export default function Container(props) {
                                     Login
                                 </a>
                             </Link>
+                            {user.id}
                             <div style={{ clear: 'left' }} />
                         </div>
                     </div>
