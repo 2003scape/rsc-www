@@ -48,6 +48,7 @@ export default function NewsArticle(props) {
                                 {props.article.title}
                             </h1>
                             <div dangerouslySetInnerHTML={articleHTML} />
+                            <div style={{clear: 'both'}} />
                         </main>
                     </div>
                 </div>
@@ -71,7 +72,7 @@ export async function getServerSideProps({ res, query }) {
         ? parseInt(query.article[1], 10)
         : undefined;
 
-    if (!id) {
+    if (typeof id !== 'number') {
         return { notFound: true };
     }
 
@@ -85,6 +86,10 @@ export async function getServerSideProps({ res, query }) {
         }
 
         const article = json.articles;
+
+        if (!article) {
+            return { notFound: true };
+        }
 
         const urlSlug = query.article[0];
         const articleSlug = slug(article.title);

@@ -20,6 +20,7 @@
     "rand-token": "^1.0.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-paginate": "^7.0.0",
     "slug": "^4.0.2",
     "yargs": "^16.2.0"
   },

@@ -59,7 +59,7 @@ function CategoryLinks(props) {
 }
 
 function NewsArticle(props, i) {
-    const articleURL =`/news/article/${slug(props.title)}/${props.id}`;
+    const articleURL = `/news/article/${slug(props.title)}/${props.id}`;
 
     return (
         <div key={i}>
@@ -77,7 +77,7 @@ function NewsArticle(props, i) {
                     <p>
                         {props.summary.trim()}...&nbsp;
                         <Link href={articleURL}>
-                            <a className="rsc-link">Read more</a>
+                            <a className="rsc-link">read more</a>
                         </Link>
                     </p>
                 </div>
@@ -123,14 +123,12 @@ export default function News(props) {
                 </strong>
             </div>
             {articles.map(NewsArticle)}
-            <br />
             <PaginationArrows
-                url={`/news`}
+                url="/news"
                 page={page}
-                totalPages={10}
-                hash={`&category=${selectedCategory}`}
+                totalPages={props.pages}
+                query={{ category: selectedCategory }}
             />
-            <br />
         </div>
     ) : (
         <p>No articles found</p>
@@ -150,9 +148,7 @@ export default function News(props) {
                                 <br />
                             </div>
                         </div>
-                        <div className="rsc-box rsc-news-box">
-                            {content}
-                        </div>
+                        <div className="rsc-box rsc-news-box">{content}</div>
                     </div>
                 </div>
             </Container>
@@ -167,8 +163,8 @@ export async function getServerSideProps({ query }) {
     );
 
     if (response.ok) {
-        const { articles } = await response.json();
-        return { props: { articles } };
+        const { articles, pages } = await response.json();
+        return { props: { articles, pages } };
     }
 
     return { notFound: true };

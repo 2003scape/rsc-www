@@ -103,6 +103,10 @@ function applyAPI(server, dataClient) {
         const query = {};
         NEWS_KEYS.forEach((key) => (query[key] = req.query[key]));
 
+        if (typeof query.id !== 'undefined') {
+            query.id = Number(query.id);
+        }
+
         if (query.terms) {
             query.terms = query.terms.slice(0, 140);
         }
@@ -117,13 +121,16 @@ function applyAPI(server, dataClient) {
         res.setHeader('content-type', 'application/json');
 
         getNews(query)
-            .then(({ articles }) => {
-                if (!articles.length) {
+            .then(({ articles, pages }) => {
+                if (
+                    !articles ||
+                    (Array.isArray(articles) && !articles.length)
+                ) {
                     getNews.delete(query);
                 }
 
                 try {
-                    res.end(JSON.stringify({ articles }));
+                    res.end(JSON.stringify({ articles, pages }));
                 } catch (e) {
                     next(e);
                 }

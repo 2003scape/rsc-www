@@ -85,7 +85,7 @@ export default function Container(props) {
                     2003scape source code
                 </a>
                 &nbsp;copyright {new Date().getFullYear()} and licensed
-                under the &nbsp;
+                under the&nbsp;
                 <a
                     className="rsc-link"
                     href="https://www.gnu.org/licenses/agpl-3.0.html"

@@ -108,8 +108,8 @@ export default function HiscoreSkills(props) {
                             </table>
                             <PaginationArrows
                                 url={`/hiscores/skill/${skill}`}
-                                postURL="#ranks"
                                 page={page}
+                                hash="ranks"
                                 totalPages={props.pages}
                             />
                         </div>
