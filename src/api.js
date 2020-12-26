@@ -155,6 +155,17 @@ function applyAPI(server, dataClient) {
             })
             .catch((err) => next(err));
     });
+
+    server.get('/api/session', (req, res) => {
+        res.setHeader('content-type', 'application/json');
+
+        console.log('test');
+
+        res.end(JSON.stringify({
+            user: req.session.user || null,
+            token: req.csrfToken()
+        }));
+    });
 }
 
 module.exports = applyAPI;

@@ -1,5 +1,7 @@
+import DropDown from './drop-down';
 import Link from 'next/link';
-import { UserContext } from '../contexts/user';
+import { SessionContext } from '../contexts/session';
+import { formatUsername } from '../username';
 import { useContext } from 'react';
 
 const SOCIAL_LINKS = [
@@ -57,7 +59,32 @@ function SocialLinks(props) {
 }
 
 export default function Container(props) {
-    const { user } = useContext(UserContext);
+    const { user } = useContext(SessionContext);
+    const isLoggedIn = user && user.id;
+
+    const userLink = isLoggedIn ? (
+        <span>
+            Logged in as&nbsp;
+            <DropDown>
+                <button className="rsc-link">
+                    {formatUsername(user.username)}
+                </button>
+                <a href="#">Account Management</a>
+                <a href={`/hiscores?name=${user.username}`}>Hiscores</a>
+                <a href="/logout">Logout</a>
+            </DropDown>
+            .
+        </span>
+    ) : (
+        <Link href="/login">
+            <a
+                className="rsc-link"
+                title="Log into or create a RuneScape account."
+            >
+                Login
+            </a>
+        </Link>
+    );
 
     return (
         <div className="rsc-container">
@@ -67,16 +94,9 @@ export default function Container(props) {
                     <div className="rsc-col rsc-col-100">
                         <div className="rsc-box rsc-header-box">
                             <SocialLinks links={SOCIAL_LINKS} />
-                            <Link href="/login">
-                                <a
-                                    className="rsc-link"
-                                    title="Log into or create a RuneScape account."
-                                    style={{ lineHeight: '16px' }}
-                                >
-                                    Login
-                                </a>
-                            </Link>
-                            {user.id}
+                            <span style={{ lineHeight: '16px' }}>
+                                {userLink}
+                            </span>
                             <div style={{ clear: 'left' }} />
                         </div>
                     </div>
@@ -89,8 +109,8 @@ export default function Container(props) {
                 <a className="rsc-link" href="https://github.com/2003scape">
                     2003scape source code
                 </a>
-                &nbsp;copyright {new Date().getFullYear()} and licensed
-                under the&nbsp;
+                &nbsp;copyright {new Date().getFullYear()} and licensed under
+                the&nbsp;
                 <a
                     className="rsc-link"
                     href="https://www.gnu.org/licenses/agpl-3.0.html"

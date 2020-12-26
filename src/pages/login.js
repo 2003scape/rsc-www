@@ -3,13 +3,13 @@ import Header from '../components/header';
 import Link from 'next/link';
 import PageName from '../components/page-name';
 import UsernameInput from '../components/username-input';
-import { UserContext } from '../contexts/user';
-import { useContext } from 'react';
+import { SessionContext } from '../contexts/session';
+import { useContext, useEffect, useState } from 'react';
 
 const PAGE_TITLE = 'Secure Login';
 
 export default function Login(props) {
-    const { user, storeUser } = useContext(UserContext);
+    const { token, storeUser } = useContext(SessionContext);
 
     const askLogin = props.askLogin ? (
         <p>
@@ -25,11 +25,11 @@ export default function Login(props) {
         </p>
     ) : undefined;
 
-    const onSubmitClick = (event) => {
-        event.preventDefault();
-        storeUser({ id: 100 });
-        //event.target.disabled = true;
-        //document.body.style.cursor = 'busy';
+    const onSubmit = (event) => {
+        setTimeout(() => {
+            event.target.querySelector('input[type="submit"]').disabled = true;
+            document.body.style.cursor = 'busy';
+        }, 2);
     };
 
     return (
@@ -52,7 +52,16 @@ export default function Login(props) {
                             />
                             {message}
                             <div className="rsc-login-form">
-                                <form action="/login" method="post">
+                                <form
+                                    action="/login"
+                                    method="post"
+                                    onSubmit={onSubmit}
+                                >
+                                    <input
+                                        type="hidden"
+                                        name="_csrf"
+                                        value={token}
+                                    />
                                     <div className="rsc-row">
                                         <label
                                             htmlFor="username"
@@ -106,7 +115,6 @@ export default function Login(props) {
                                         className="rsc-input"
                                         type="submit"
                                         value="Secure Login"
-                                        onClick={onSubmitClick}
                                     />
                                 </form>
                                 <br />
@@ -152,5 +160,9 @@ export default function Login(props) {
 }
 
 export async function getServerSideProps({ req }) {
+    if (req.session.user && req.session.user.id) {
+        return { redirect: { destination: '/', permanent: false } };
+    }
+
     return { props: { errorMessage: req.errorMessage || null } };
 }

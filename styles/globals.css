@@ -1,6 +1,7 @@
 /* generic elements */
 
-body {
+body,
+button {
     background-color: #000;
     color: #fff;
     font-family: Arial, Helvetica, sans-serif;
@@ -90,12 +91,14 @@ hr {
     clear: both;
 }
 
-.rsc-link, .rsc-pagination a {
+.rsc-link,
+.rsc-pagination a {
     text-decoration: none;
     color: #90c040;
     padding: 0;
     font-size: inherit;
     cursor: pointer;
+    background-color: inherit;
 }
 
 .rsc-link:hover {
@@ -588,7 +591,8 @@ hr {
     background-color: #1e1e1e;
 }
 
-.rsc-hiscores-table tbody tr:hover, tbody .rsc-hover-row {
+.rsc-hiscores-table tbody tr:hover,
+tbody .rsc-hover-row {
     background-color: #333 !important;
 }
 
@@ -603,7 +607,8 @@ hr {
     width: 100%;
 }
 
-.rsc-hiscores-table td, .rsc-hiscores-table th {
+.rsc-hiscores-table td,
+.rsc-hiscores-table th {
     padding: 0 4px 0 4px;
 }
 
@@ -625,7 +630,8 @@ hr {
     width: 16%;
 }
 
-.rsc-col-name, .rsc-col-compare-name {
+.rsc-col-name,
+.rsc-col-compare-name {
     word-wrap: break-word;
 }
 
@@ -633,11 +639,13 @@ hr {
     width: 38%;
 }
 
-.rsc-col-name, .rsc-col-compare-name {
+.rsc-col-name,
+.rsc-col-compare-name {
     height: 24px;
 }
 
-.rsc-col-name a, .rsc-col-compare-name a {
+.rsc-col-name a,
+.rsc-col-compare-name a {
     display: inline-block;
     width: 100%;
 }
@@ -660,7 +668,8 @@ hr {
     width: 22%;
 }
 
-.rsc-col-compare-rank, .rsc-col-compare-level {
+.rsc-col-compare-rank,
+.rsc-col-compare-level {
     width: 8%;
 }
 
@@ -777,6 +786,51 @@ hr {
     text-decoration: underline;
 }
 
+/* pop-up drop-down menu */
+
+.rsc-drop-down {
+    position: relative;
+    display: inline;
+}
+
+.rsc-drop-down-links {
+    box-sizing: border-box;
+    display: none;
+    list-style: none;
+    position: absolute;
+    top: 125%;
+    width: 154px;
+    left: -200%;
+    text-align: center;
+    border: 2px solid #382418;
+    background-color: #000;
+    margin-top: 8px;
+    border-radius: 4px;
+    padding: 0;
+}
+
+.rsc-drop-down-links li a {
+    box-sizing: border-box;
+    padding: 4px;
+    width: 100%;
+    display: inline-block;
+}
+
+.rsc-drop-down-links li:not(:last-child) {
+    border-bottom: 2px solid #1e1e1e;
+}
+
+.rsc-drop-down-links::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -8px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: transparent transparent #382418 transparent;
+}
+
 @media (max-width: 540px) {
     body {
         font-size: 14px;
@@ -886,7 +940,8 @@ hr {
         padding: 6px 0 6px 0;
     }
 
-    td.rsc-col-name, td.rsc-col-compare-name {
+    td.rsc-col-name,
+    td.rsc-col-compare-name {
         height: 48px;
     }
 

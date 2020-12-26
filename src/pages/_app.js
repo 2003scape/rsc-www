@@ -1,17 +1,31 @@
+require('isomorphic-fetch');
+
 import '../../styles/globals.css';
-import UserContextProvider from '../contexts/user';
+import SessionContextProvider from '../contexts/session';
 
 function App({ Component, pageProps, props }) {
     return (
-        <UserContextProvider test={props.test}>
-            <Component {...pageProps} />
-        </UserContextProvider>
+        <>
+            <SessionContextProvider session={props.session}>
+                <Component {...pageProps} />
+            </SessionContextProvider>
+        </>
     );
 }
 
 App.getInitialProps = async function ({ ctx: { req } }) {
-    console.log(req);
-    return { props: { test: 'farts' } };
+    const response = await fetch(`${process.env.url}api/session`, {
+        headers: {
+            cookie: req ? req.get('cookie') : undefined
+        }
+    });
+
+    if (response.ok) {
+        const session = await response.json();
+        return { props: { session } };
+    }
+
+    return { notFound: true };
 };
 
 export default App;
