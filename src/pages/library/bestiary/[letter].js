@@ -83,7 +83,6 @@ function MonsterDescription(props) {
             <img
                 src={imageURL}
                 alt={`Animated image of ${props.name}`}
-                style={{ float: 'right' }}
             />
             <dl>
                 <div className="rsc-spaced-dl">

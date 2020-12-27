@@ -909,6 +909,10 @@ tbody .rsc-hover-row {
     text-align: left;
 }
 
+.rsc-bestiary-info img {
+    float: right;
+}
+
 .rsc-bestiary-info a {
     text-decoration: none;
     color: inherit;
@@ -1124,6 +1128,29 @@ tbody .rsc-hover-row {
     .rsc-tiled-scroll-content {
         padding-left: 50px;
         padding-right: 50px;
+    }
+
+    .rsc-bestiary-info img {
+        float: none;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+
+    .rsc-bestiary-info dt, .rsc-bestiary-info dd {
+        float: none;
+        display: block;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .rsc-bestiary-info dt {
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+
+    .rsc-bestiary-info dd {
+        margin-bottom: 16px;
     }
 }
 
