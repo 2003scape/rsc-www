@@ -122,18 +122,16 @@ export default function HiscoreSkills(props) {
     );
 }
 
-function redirect(res, url) {
-    res.setHeader('location', url);
-    res.statusCode = 303;
-    res.end();
-}
-
-export async function getServerSideProps({ res, params, query }) {
+export async function getServerSideProps({ params, query }) {
     const skill = query.skill ? ('' + query.skill).toLowerCase() : 'overall';
 
     if (!SKILL_NAMES.has(skill)) {
-        redirect(res, '/hiscores/skill/overall');
-        return { notFound: true };
+        return {
+            redirect: {
+                destination: '/hiscores/skill/overall',
+                permanent: true
+            }
+        };
     }
 
     const page = query.page ? query.page : 1;
@@ -148,8 +146,12 @@ export async function getServerSideProps({ res, params, query }) {
         const { ranks, pages } = await response.json();
 
         if (page > pages) {
-            redirect(res, `/hiscores/skill/${params.skill}`);
-            return { notFound: true };
+            return {
+                redirect: {
+                    destination: `/hiscores/skill/${params.skill}`,
+                    permanent: false
+                }
+            };
         }
 
         return { props: { ranks, pages } };

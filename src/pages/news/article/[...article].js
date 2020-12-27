@@ -14,12 +14,11 @@ import PageName from '../../../components/page-name';
 const PAGE_TITLE = 'Latest News';
 
 function formateDate(date) {
-    return date
-        .toLocaleString('en-gb', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
+    return date.toLocaleString('en-gb', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
 }
 
 export default function NewsArticle(props) {
@@ -48,7 +47,7 @@ export default function NewsArticle(props) {
                                 {props.article.title}
                             </h1>
                             <div dangerouslySetInnerHTML={articleHTML} />
-                            <div style={{clear: 'both'}} />
+                            <div style={{ clear: 'both' }} />
                         </main>
                     </div>
                 </div>
@@ -57,13 +56,7 @@ export default function NewsArticle(props) {
     );
 }
 
-function redirect(res, url) {
-    res.setHeader('location', url);
-    res.statusCode = 303;
-    res.end();
-}
-
-export async function getServerSideProps({ res, query }) {
+export async function getServerSideProps({ query }) {
     if (!query.article || query.article.length !== 2) {
         return { notFound: true };
     }
@@ -95,8 +88,12 @@ export async function getServerSideProps({ res, query }) {
         const articleSlug = slug(article.title);
 
         if (articleSlug !== urlSlug) {
-            redirect(res, `/news/article/${articleSlug}/${id}`);
-            return { notFound: true };
+            return {
+                redirect: {
+                    destination: `/news/article/${articleSlug}/${id}`,
+                    permanent: true
+                }
+            };
         }
 
         return { props: { article } };

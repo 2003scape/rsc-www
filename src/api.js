@@ -35,6 +35,7 @@ function applyAPI(server, dataClient) {
         MEMOIZE_OPTIONS
     );
 
+    // we want to save files forever
     const getFile = memoize(dataClient.getFile.bind(dataClient), {
         promise: true,
         primitive: true
@@ -156,15 +157,17 @@ function applyAPI(server, dataClient) {
             .catch((err) => next(err));
     });
 
-    server.get('/api/session', (req, res) => {
+    server.get('/api/session', (req, res, next) => {
         res.setHeader('content-type', 'application/json');
 
-        console.log('test');
-
-        res.end(JSON.stringify({
-            user: req.session.user || null,
-            token: req.csrfToken()
-        }));
+        try {
+            res.end(JSON.stringify({
+                user: req.session.user || null,
+                token: req.csrfToken()
+            }));
+        } catch (e) {
+            next(e);
+        }
     });
 }
 

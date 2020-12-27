@@ -740,6 +740,10 @@ tbody .rsc-hover-row {
     padding: 8px;
 }
 
+.rsc-category-links {
+    margin-bottom: 4px;
+}
+
 .rsc-category-link {
     text-decoration: none;
 }
@@ -829,6 +833,127 @@ tbody .rsc-hover-row {
     border-width: 8px;
     border-style: solid;
     border-color: transparent transparent #382418 transparent;
+}
+
+/* library */
+.rsc-library-box h2 {
+    margin: 0;
+}
+
+.rsc-library-box {
+    display: block;
+    max-width: 160px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.rsc-library-box:hover,
+.rsc-library-box:active {
+    text-decoration: underline;
+}
+
+.rsc-library-right {
+    float: right;
+}
+
+.rsc-library-left {
+    float: left;
+    margin-top: 150px;
+}
+
+/* tiled, dynamic height scroll */
+.rsc-tiled-scroll {
+    background-image: url(../public/scroll-background.png);
+    background-repeat: repeat-y;
+    background-size: 100% auto;
+    max-width: 493px;
+    margin: 0 auto 0 auto;
+    box-sizing: border-box;
+}
+
+.rsc-tiled-scroll::before {
+    content: '';
+    background-image: url(../public/scroll-top.png);
+    background-repeat: no-repeat;
+    background-size: 100% 64px;
+    width: 100%;
+    height: 64px;
+    display: block;
+    position: relative;
+    bottom: 54px;
+    margin-top: 54px;
+    margin-bottom: -54px;
+}
+
+.rsc-tiled-scroll::after {
+    content: '';
+    background-image: url(../public/scroll-bottom.png);
+    background-repeat: no-repeat;
+    background-size: 100% 64px;
+    width: 100%;
+    height: 64px;
+    display: block;
+    position: relative;
+    top: 54px;
+    margin-top: -54px;
+    margin-bottom: 54px;
+}
+
+.rsc-tiled-scroll-content {
+    padding: 0 68px 0 72px;
+    text-shadow: 1px 1px 1px #000;
+}
+
+/* bestiary */
+.rsc-bestiary-info {
+    text-align: left;
+}
+
+.rsc-bestiary-info a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.rsc-bestiary-info a:hover {
+    text-decoration: underline;
+}
+
+.rsc-bestiary-info h3 {
+    font-size: 15px;
+    margin-left: 8px;
+}
+
+.rsc-bestiary-info dl {
+    width: 100%
+}
+
+.rsc-bestiary-info dt {
+    width: 25%;
+    float: left;
+}
+
+.rsc-bestiary-info dd {
+    margin: 0;
+    float: left;
+    max-width: 75%;
+    margin-bottom: 8px;
+}
+
+.rsc-spaced-dl dt {
+    margin-bottom: 32px;
+}
+
+.rsc-spaced-dl dd {
+    float: none;
+}
+
+.rsc-newline-dd {
+    white-space: pre-wrap;
+}
+
+.rsc-bestiary-info:not(:last-child) {
+    border-bottom: 1px solid rgb(128,128,128);
+    margin-bottom: 8px;
 }
 
 @media (max-width: 540px) {
@@ -995,6 +1120,11 @@ tbody .rsc-hover-row {
         flex-direction: row;
         display: flex;
     }
+
+    .rsc-tiled-scroll-content {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
 }
 
 @media (max-width: 614px) {
@@ -1009,5 +1139,16 @@ tbody .rsc-hover-row {
 
     .rsc-select-members {
         top: 182px;
+    }
+}
+
+@media (max-width: 590px) {
+    .rsc-library-box {
+        float: none;
+        margin-top: 8px;
+    }
+
+    .rsc-library-box .rsc-stone-box {
+        margin: 2px;
     }
 }
