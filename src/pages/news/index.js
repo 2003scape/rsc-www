@@ -123,12 +123,14 @@ export default function News(props) {
                 </strong>
             </div>
             {articles.map(NewsArticle)}
+            <br />
             <PaginationArrows
                 url="/news"
                 page={page}
                 totalPages={props.pages}
                 query={{ category: selectedCategory }}
             />
+            <br />
         </div>
     ) : (
         <p>No articles found</p>
@@ -142,7 +144,7 @@ export default function News(props) {
                 <div className="rsc-row">
                     <div className="rsc-col rsc-col-100">
                         <div className="rsc-row">
-                            <div className="rsc-col rsc-col-75">
+                            <div className="rsc-col rsc-col-100">
                                 <br />
                                 <CategoryLinks selected={selectedCategory} />
                                 <br />

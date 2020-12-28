@@ -12,7 +12,7 @@ export default function Library() {
             <Container>
                 <PageName pageName={PAGE_TITLE} />
                 <div className="rsc-row">
-                    <div className="rsc-col rsc-col-100">
+                    <div className="rsc-col rsc-col-75">
                         <div className="rsc-tiled-scroll">
                             <div class="rsc-tiled-scroll-content">
                                 <Link href="/library/letters">

@@ -75,6 +75,7 @@ export default function HiscoreSkills(props) {
             <Header pageName={pageTitle} />
             <Container>
                 <PageName pageName={PAGE_TITLE} />
+                <br />
                 <div className="rsc-row">
                     <aside
                         className="rsc-col rsc-col-36"

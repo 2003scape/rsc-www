@@ -5,7 +5,7 @@ export default function PageName(props) {
         <header className="rsc-box rsc-header">
             <h1>{props.pageName}</h1>
             <Link href="/">
-                <a className="rsc-link">Main menu</a>
+                <a className="rsc-link rsc-small-block">Main menu</a>
             </Link>
             {props.children ? ' - ' : ''}
             {props.children}

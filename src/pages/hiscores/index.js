@@ -257,7 +257,7 @@ export default function Hiscores(props) {
             <Container>
                 <PageName pageName={PAGE_TITLE}>
                     <Link href="/hiscores">
-                        <a className="rsc-link">All Hiscores</a>
+                        <a className="rsc-link rsc-small-block">All Hiscores</a>
                     </Link>
                 </PageName>
                 <div className="rsc-row">{content}</div>

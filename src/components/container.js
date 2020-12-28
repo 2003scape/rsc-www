@@ -63,7 +63,7 @@ export default function Container(props) {
     const isLoggedIn = user && user.id;
 
     const userLink = isLoggedIn ? (
-        <span>
+        <>
             Logged in as&nbsp;
             <DropDown>
                 <button className="rsc-link">
@@ -74,16 +74,26 @@ export default function Container(props) {
                 <a href="/logout">Logout</a>
             </DropDown>
             .
-        </span>
+        </>
     ) : (
-        <Link href="/login">
-            <a
-                className="rsc-link"
-                title="Log into or create a RuneScape account."
-            >
-                Login
-            </a>
-        </Link>
+        <>
+            <Link href="/login">
+                <a
+                    className="rsc-link rsc-small-block"
+                    title="Securely log in to the website."
+                >
+                    Login
+                </a>
+            </Link>
+            <Link href="/register">
+                <a
+                    className="rsc-register-link rsc-small-block"
+                    title="Create a RuneScape account."
+                >
+                    Create account
+                </a>
+            </Link>
+        </>
     );
 
     return (

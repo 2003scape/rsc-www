@@ -75,7 +75,10 @@ export default function PaginationArrows({
                         disabled={page <= 0}
                     />
                 </div>
-                <div className="rsc-col rsc-col-50">
+                <div
+                    className="rsc-col rsc-col-50"
+                    style={{ textAlign: 'center' }}
+                >
                     <input
                         key={page}
                         className="rsc-input"

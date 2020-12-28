@@ -15,6 +15,8 @@ for (let i = 97; i <= 122; i += 1) {
 
 function LetterLink(props) {
     const { selected, letter } = props;
+    const title =
+        'View monsters beginning with the letter ' + letter.toUpperCase();
 
     return (
         <Link href={`/library/bestiary/${letter}`}>
@@ -22,7 +24,8 @@ function LetterLink(props) {
                 className={`rsc-link${
                     letter === selected ? ' rsc-strong-text' : ''
                 }`}
-                title={`View monsters beginning with ${letter.toUpperCase()}`}
+                title={title}
+                style={{ padding: '2px', display: 'inline-block' }}
             >
                 {letter.toUpperCase()}
             </a>
@@ -80,10 +83,7 @@ function MonsterDescription(props) {
             <a href={`#${slugged}`}>
                 <h3 id={slugged}>{props.name}</h3>
             </a>
-            <img
-                src={imageURL}
-                alt={`Animated image of ${props.name}`}
-            />
+            <img src={imageURL} alt={`Animated image of ${props.name}`} />
             <dl>
                 <div className="rsc-spaced-dl">
                     <dt>Height:</dt>
@@ -110,10 +110,10 @@ function MonsterDescription(props) {
                 <dd className="rsc-newline-dd">{props.description}</dd>
                 <div style={{ clear: 'left' }} />
                 <dt>Likes:</dt>
-                <dd>{props.likes}</dd>
+                <dd className="rsc-newline-dd">{props.likes}</dd>
                 <div style={{ clear: 'left' }} />
                 <dt>Dislikes:</dt>
-                <dd>{props.dislikes}</dd>
+                <dd className="rsc-newline-dd">{props.dislikes}</dd>
                 <div style={{ clear: 'left' }} />
             </dl>
             <div style={{ clear: 'both' }} />
@@ -130,7 +130,9 @@ export default function Bestiary(props) {
             <Container>
                 <PageName pageName={PAGE_TITLE}>
                     <Link href="/library">
-                        <a className="rsc-link">Library of Varrock</a>
+                        <a className="rsc-link rsc-small-block">
+                            Library of Varrock
+                        </a>
                     </Link>
                 </PageName>
                 <LetterLinks letter={letter} />

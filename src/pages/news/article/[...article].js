@@ -31,7 +31,7 @@ export default function NewsArticle(props) {
             <Container>
                 <PageName pageName={PAGE_TITLE}>
                     <Link href="/news">
-                        <a className="rsc-link">All News</a>
+                        <a className="rsc-link rsc-small-block">All News</a>
                     </Link>
                 </PageName>
                 <div className="rsc-row">
