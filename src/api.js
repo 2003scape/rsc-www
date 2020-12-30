@@ -35,6 +35,12 @@ function applyAPI(server, dataClient) {
         MEMOIZE_OPTIONS
     );
 
+    const getGodLetter = dataClient.getGodLetter.bind(dataClient);
+    /*memoize(
+        dataClient.getGodLetter.bind(dataClient),
+        MEMOIZE_OPTIONS
+    );*/
+
     // we want to save files forever
     const getFile = memoize(dataClient.getFile.bind(dataClient), {
         promise: true,
@@ -139,6 +145,32 @@ function applyAPI(server, dataClient) {
             .catch((err) => next(err));
     });
 
+    server.get('/api/god-letters', (req, res, next) => {
+        const id =
+            req.query.id && !Number.isNaN(+req.query.id)
+                ? parseInt(req.query.id, 10)
+                : undefined;
+
+        res.setHeader('content-type', 'application/json');
+
+        getGodLetter(id)
+            .then(({ letters }) => {
+                if (
+                    typeof id === 'number' &&
+                    (!letters || (Array.isArray(letters) && !letters.length))
+                ) {
+                    getGodLetter.delete(id);
+                }
+
+                try {
+                    res.end(JSON.stringify({ letters }));
+                } catch (e) {
+                    next(e);
+                }
+            })
+            .catch((err) => next(err));
+    });
+
     server.get('/images/:name', (req, res, next) => {
         const name = req.params.name;
 
@@ -161,10 +193,12 @@ function applyAPI(server, dataClient) {
         res.setHeader('content-type', 'application/json');
 
         try {
-            res.end(JSON.stringify({
-                user: req.session.user || null,
-                token: req.csrfToken()
-            }));
+            res.end(
+                JSON.stringify({
+                    user: req.session.user || null,
+                    token: req.csrfToken()
+                })
+            );
         } catch (e) {
             next(e);
         }

@@ -130,7 +130,7 @@ export default function Bestiary(props) {
             <Container>
                 <PageName pageName={PAGE_TITLE}>
                     <Link href="/library">
-                        <a className="rsc-link rsc-small-block">
+                        <a className="rsc-link rsc-small-block rsc-small-spaced">
                             Library of Varrock
                         </a>
                     </Link>

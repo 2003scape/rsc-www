@@ -257,7 +257,9 @@ export default function Hiscores(props) {
             <Container>
                 <PageName pageName={PAGE_TITLE}>
                     <Link href="/hiscores">
-                        <a className="rsc-link rsc-small-block">All Hiscores</a>
+                        <a className="rsc-link rsc-small-block rsc-small-spaced">
+                            All Hiscores
+                        </a>
                     </Link>
                 </PageName>
                 <div className="rsc-row">{content}</div>
@@ -316,5 +318,5 @@ export async function getServerSideProps({ query }) {
         return { props: { ranks, pages } };
     }
 
-    return { notFound: true }
+    return { notFound: true };
 }

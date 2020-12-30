@@ -22,6 +22,17 @@ const CATEGORIES = {
 
 const CATEGORY_IDS = Object.keys(CATEGORIES).map(Number).sort();
 
+function formatDate(date) {
+    return date
+        .toLocaleString('en-gb', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+        })
+        .replace(/ /g, '-')
+        .replace(/,/g, '');
+}
+
 function CategoryLink(props) {
     const { colour, name } = CATEGORIES[props.id];
 
@@ -58,11 +69,11 @@ function CategoryLinks(props) {
     );
 }
 
-function NewsArticle(props, i) {
+function NewsArticle(props) {
     const articleURL = `/news/article/${slug(props.title)}/${props.id}`;
 
     return (
-        <div key={i}>
+        <div key={props.key}>
             <article className="rsc-row">
                 <CategoryLink
                     className="rsc-col rsc-col-25 rsc-article-category"
@@ -82,14 +93,7 @@ function NewsArticle(props, i) {
                     </p>
                 </div>
                 <time className="rsc-col rsc-col-25 rsc-right-text rsc-article-date">
-                    {new Date(props.date * 1000)
-                        .toLocaleString('en-gb', {
-                            year: 'numeric',
-                            month: 'short',
-                            day: 'numeric'
-                        })
-                        .replace(/ /g, '-')
-                        .replace(/,/g, '')}
+                    {formatDate(new Date(props.date * 1000))}
                 </time>
             </article>
             <hr />
@@ -110,7 +114,7 @@ export default function News(props) {
         : 0;
 
     const content = articles.length ? (
-        <div>
+        <>
             <div className="rsc-row rsc-news-head">
                 <strong className="rsc-col rsc-col-25 rsc-left-text">
                     Category
@@ -122,7 +126,7 @@ export default function News(props) {
                     Date
                 </strong>
             </div>
-            {articles.map(NewsArticle)}
+            {articles.map((article, i) => NewsArticle({ ...article, key: i }))}
             <br />
             <PaginationArrows
                 url="/news"
@@ -131,7 +135,7 @@ export default function News(props) {
                 query={{ category: selectedCategory }}
             />
             <br />
-        </div>
+        </>
     ) : (
         <p>No articles found</p>
     );

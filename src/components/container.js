@@ -79,7 +79,7 @@ export default function Container(props) {
         <>
             <Link href="/login">
                 <a
-                    className="rsc-link rsc-small-block"
+                    className="rsc-link rsc-small-block rsc-small-spaced"
                     title="Securely log in to the website."
                 >
                     Login
@@ -87,7 +87,7 @@ export default function Container(props) {
             </Link>
             <Link href="/register">
                 <a
-                    className="rsc-register-link rsc-small-block"
+                    className="rsc-register-link rsc-small-block rsc-small-spaced"
                     title="Create a RuneScape account."
                 >
                     Create account

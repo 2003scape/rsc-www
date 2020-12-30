@@ -14,7 +14,7 @@ export default function Library() {
                 <div className="rsc-row">
                     <div className="rsc-col rsc-col-75">
                         <div className="rsc-tiled-scroll">
-                            <div class="rsc-tiled-scroll-content">
+                            <div className="rsc-tiled-scroll-content">
                                 <Link href="/library/letters">
                                     <a className="rsc-box rsc-library-box rsc-library-right">
                                         <div className="rsc-stone-box ">

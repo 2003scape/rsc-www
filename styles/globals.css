@@ -75,6 +75,10 @@ hr {
     color: #faa8aa;
 }
 
+.rsc-centre-text {
+    text-align: center;
+}
+
 .rsc-left-text {
     text-align: left;
 }
@@ -101,7 +105,8 @@ hr {
     background-color: inherit;
 }
 
-.rsc-link:hover, .rsc-register-link:hover {
+.rsc-link:hover,
+.rsc-register-link:hover {
     text-decoration: underline;
 }
 
@@ -168,11 +173,10 @@ hr {
 }
 
 .rsc-header {
-    margin-top: 0;
-    margin-left: auto;
-    margin-right: auto;
+    max-width: 292px;
     min-width: 250px;
-    width: 40%;
+    padding: 4px;
+    max-width: 80%;
 }
 
 .rsc-header-box {
@@ -272,14 +276,29 @@ hr {
     box-sizing: border-box;
 }
 
+.rsc-col-20 {
+    width: 20%;
+    padding: 0 4% 0 4%;
+}
+
 .rsc-col-25 {
     width: 25%;
+    padding: 0 4% 0 4%;
+}
+
+.rsc-col-30 {
+    width: 30%;
     padding: 0 4% 0 4%;
 }
 
 .rsc-col-36 {
     width: 36%;
     padding: 0 4% 0 4%;
+}
+
+.rsc-col-50 {
+    width: 50%;
+    padding: 0 2% 0 2%;
 }
 
 .rsc-col-64 {
@@ -289,11 +308,6 @@ hr {
 
 .rsc-col-75 {
     width: 75%;
-    padding: 0 2% 0 2%;
-}
-
-.rsc-col-50 {
-    width: 50%;
     padding: 0 2% 0 2%;
 }
 
@@ -598,12 +612,14 @@ hr {
 }
 
 .rsc-hiscores-table tbody tr:nth-child(odd) {
-    background-color: #1e1e1e;
+    /*background-color: #1e1e1e;*/
+    background-color: #131313;
 }
 
 .rsc-hiscores-table tbody tr:hover,
 tbody .rsc-hover-row {
-    background-color: #333 !important;
+    /*background-color: #333 !important;*/
+    background-color: #1e1e1e !important;
 }
 
 .rsc-hiscores-table th {
@@ -783,9 +799,34 @@ tbody .rsc-hover-row {
     padding: 8px;
 }
 
-.rsc-article-box img {
+.rsc-article-box hr {
+    background-image: url(../public/hr-stones.jpg);
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    width: 100%;
+    height: 10px;
+    border: none;
     margin: 8px 0 8px 0;
+}
+
+.rsc-article-box img {
+    /*margin: 8px 4px 8px 4px;*/
+    margin-top: 4px;
+    margin-bottom: 4px;
     max-width: 100%;
+}
+
+.rsc-article-box img[align='left'] {
+    margin-right: 4px;
+}
+
+.rsc-article-box img[align='right'] {
+    margin-left: 4px;
+}
+
+.rsc-article-box blockquote {
+    font-style: italic;
+    margin: 0;
 }
 
 .rsc-article-box h1:first-child {
@@ -972,6 +1013,25 @@ tbody .rsc-hover-row {
     margin-bottom: 16px;
 }
 
+/* letters to the gods */
+
+.rsc-letters-box .rsc-col {
+    padding: 0;
+}
+
+.rsc-letters-name::before {
+    content: '-';
+    position: relative;
+    left: -8px;
+    display: inline-block;
+    width: 0;
+}
+
+.rsc-letters-row {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
 @media (max-width: 540px) {
     body {
         font-size: 14px;
@@ -1008,9 +1068,8 @@ tbody .rsc-hover-row {
     }
 
     .rsc-header {
+        padding-top: 8px;
         min-width: 172px;
-        margin-top: 16px;
-        margin-bottom: 16px;
     }
 
     .rsc-footer {
@@ -1130,6 +1189,15 @@ tbody .rsc-hover-row {
         margin-right: 4px;
     }
 
+    .rsc-article-box img,
+    .rsc-article-box img[align='left'],
+    .rsc-article-box img[align='right'] {
+        float: none;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+
     .rsc-pagination {
         display: none;
     }
@@ -1165,9 +1233,16 @@ tbody .rsc-hover-row {
         margin-left: 0;
     }
 
+    .rsc-small-spaced {
+        margin: 4px;
+    }
+
     .rsc-small-block {
         display: block;
-        margin: 4px;
+    }
+
+    .rsc-letters-name::before {
+        display: none;
     }
 }
 
