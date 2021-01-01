@@ -346,7 +346,6 @@ hr {
 /* the bars in between the edge and badge */
 
 .rsc-border-bar {
-    /*position: relative;*/
     width: 100%;
 }
 
@@ -849,6 +848,10 @@ tbody .rsc-hover-row {
     padding-left: 16px;
 }
 
+.rsc-article-box table {
+    min-width: 250px;
+}
+
 /* pop-up drop-down menu */
 
 .rsc-drop-down {
@@ -1082,21 +1085,25 @@ a.rsc-media-box:focus {
 }
 
 /* list scroll */
+
 .rsc-list-scroll {
     background-image: url(../public/list-scroll.png);
     background-repeat: no-repeat;
-    width: 246px;
+    background-size: 100% 100%;
+    max-width: 246px;
     height: 383px;
-    margin: 0 auto 0 auto;
+    margin: 8px auto 8px auto;
     box-sizing: border-box;
-    padding-top: 11px;
-    padding-bottom: 40px;
+    padding-bottom: 24px;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .rsc-list-scroll-header {
     height: 0;
+    position: absolute;
+    top: 11px;
 }
 
 .rsc-list-scroll-content {
@@ -1104,6 +1111,10 @@ a.rsc-media-box:focus {
    padding: 22px 32px 0 32px;
    box-sizing: border-box;
    text-shadow: 1px 1px 1px #000;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
 }
 
 .rsc-list-scroll-centre {
@@ -1125,14 +1136,37 @@ a.rsc-media-box:focus {
 .rsc-list-scroll-list a {
     color: inherit;
     text-decoration: none;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
     display: block;
 }
 
 .rsc-list-scroll-list a:hover,
 .rsc-list-scroll-list a:focus {
     text-decoration: underline;
+}
+
+/* skill table used in manuals */
+
+.rsc-skill-table {
+    width: 80%;
+    overflow-x: auto;
+    margin: 4px auto 4px auto;
+}
+
+.rsc-skill-table table {
+    width: 100%;
+    min-width: 240px;
+}
+
+.rsc-skill-table th {
+    background-color: #382418;
+}
+
+.rsc-skill-table th, .rsc-skill-table td {
+    padding: 6px;
+    text-align: center;
+    width: 25%;
 }
 
 @media (max-width: 540px) {
