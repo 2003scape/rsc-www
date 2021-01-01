@@ -46,7 +46,7 @@ export default function Login(props) {
                                 2003scape.com
                             </p>
                             <img
-                                className="rsc-img"
+                                className="rsc-image"
                                 src="/only-2003scape.gif"
                                 alt="Only enter your password on 2003scape.com"
                             />
@@ -120,10 +120,7 @@ export default function Login(props) {
                                 <br />
                                 <div className="rsc-row">
                                     <div className="rsc-col rsc-col-50">
-                                        <div
-                                            className="rsc-stone-box"
-                                            style={{ height: '100%' }}
-                                        >
+                                        <div className="rsc-stone-box">
                                             <Link href="#">
                                                 <a className="rsc-link">
                                                     <h2>Lost password?</h2>
@@ -135,11 +132,8 @@ export default function Login(props) {
                                         </div>
                                     </div>
                                     <div className="rsc-col rsc-col-50">
-                                        <div
-                                            className="rsc-stone-box"
-                                            style={{ height: '100%' }}
-                                        >
-                                            <Link href="#">
+                                        <div className="rsc-stone-box">
+                                            <Link href="/manual/about/getting-started">
                                                 <a className="rsc-link">
                                                     <h2>Need an account?</h2>
                                                 </a>
@@ -149,7 +143,6 @@ export default function Login(props) {
                                         </div>
                                     </div>
                                 </div>
-                                <br />
                             </div>
                         </div>
                     </div>

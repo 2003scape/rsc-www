@@ -29,7 +29,7 @@ hr {
 
 /* re-usable components */
 
-.rsc-img {
+.rsc-image {
     max-width: 100%;
 }
 
@@ -160,7 +160,8 @@ hr {
 }
 
 .rsc-stone-box {
-    background: url(../public/stone-background.png);
+    background-color: #474747;
+    background-image: url(../public/stone-background.png);
     border: 3px outset #373737;
     box-sizing: border-box;
     padding: 4px;
@@ -799,7 +800,7 @@ tbody .rsc-hover-row {
     padding: 8px;
 }
 
-.rsc-article-box hr {
+.rsc-article-box hr, .rsc-stones-hr {
     background-image: url(../public/hr-stones.jpg);
     background-repeat: no-repeat;
     background-position: 50% 0;
@@ -1032,6 +1033,48 @@ tbody .rsc-hover-row {
     margin-bottom: 4px;
 }
 
+/* media boxes */
+
+.rsc-media-box {
+    text-decoration: none;
+    color: inherit;
+}
+
+a.rsc-media-box:hover,
+a.rsc-media-box:focus {
+    filter: brightness(115%);
+}
+
+.rsc-media-box h2 {
+    font-weight: inherit;
+    max-width: 150px;
+}
+
+.rsc-media-box img {
+    max-width: 100%;
+}
+
+.rsc-media-box p {
+    overflow: hidden;
+}
+
+/* screenshots */
+
+.rsc-thumbnails:not(:last-child) {
+    margin-bottom: 16px;
+}
+
+.rsc-image-thumbnail {
+    display: inline-block;
+    margin: 8px;
+}
+
+.rsc-image-thumbnail > div {
+    display: inline-block;
+    height: 80px;
+    width: 120px;
+}
+
 @media (max-width: 540px) {
     body {
         font-size: 14px;
@@ -1243,6 +1286,14 @@ tbody .rsc-hover-row {
 
     .rsc-letters-name::before {
         display: none;
+    }
+
+    .rsc-media-box p {
+        text-align: center;
+    }
+
+    .rsc-media-box .rsc-box {
+        width: 100%;
     }
 }
 

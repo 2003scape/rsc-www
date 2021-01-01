@@ -11,6 +11,7 @@
     "@2003scape/rsc-data": "^1.0.18",
     "body-parser": "^1.19.0",
     "bole": "^4.0.0",
+    "chunk": "0.0.3",
     "cookie-session": "^1.4.0",
     "csurf": "^1.11.0",
     "express": "^4.17.1",
@@ -23,6 +24,7 @@
     "rand-token": "^1.0.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-modal-image": "^2.5.0",
     "react-paginate": "^7.0.0",
     "slug": "^4.0.2",
     "yargs": "^16.2.0"
