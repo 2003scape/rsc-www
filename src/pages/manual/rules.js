@@ -21,9 +21,14 @@ function RuleMediaBoxes(props) {
                             rule += 1;
 
                             return (
-                                <MediaBox src={image} key={name}>
+                                <MediaBox
+                                    src={image}
+                                    smallImage={true}
+                                    key={rule}
+                                >
                                     <h2 className="rsc-stone-box">{name}</h2>
-                                    <strong>Rule {rule}.</strong><br />
+                                    <strong>Rule {rule}.</strong>
+                                    <br />
                                     {body}
                                 </MediaBox>
                             );
@@ -50,10 +55,20 @@ export default function ManualRules() {
                     </Link>
                 </PageName>
                 <div className="rsc-row">
-                    <div className="rsc-col rsc-col-100">
-                        <RuleMediaBoxes rules={rules} />
+                    <div class="rsc-col rsc-col-100">
+                        <p>
+                            To keep RuneScape enjoyable for everyone there
+                            are&nbsp;<strong>eleven</strong> rules you must
+                            observe.
+                            <br />
+                            We won't tolerate disruptive players, and if you
+                            break our rules you will be banned. <br />
+                            Members who are banned for breaking our rules are
+                            not entitled to any sort of refund.
+                        </p>
                     </div>
                 </div>
+                <RuleMediaBoxes rules={rules} />
             </Container>
         </div>
     );

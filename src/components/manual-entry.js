@@ -11,7 +11,8 @@ import PageName from './page-name';
 import manuals from '@2003scape/rsc-manuals';
 
 export default function ManualEntry(props) {
-    const pageTitle = `${props.title} - About RuneScape - RuneScape Manual`;
+    const pageTitle =
+        `${props.title} - ${props.sectionName} - ` + 'RuneScape Manual';
 
     const manualHTML = {
         __html: markdown.render(manuals[props.section][props.manual])

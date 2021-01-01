@@ -234,6 +234,8 @@ hr {
 
 .rsc-logo {
     margin-top: 16px;
+    width: 309px;
+    height: 106px;
 }
 
 .rsc-scroll {
@@ -843,6 +845,10 @@ tbody .rsc-hover-row {
     text-decoration: underline;
 }
 
+.rsc-article-box ul {
+    padding-left: 16px;
+}
+
 /* pop-up drop-down menu */
 
 .rsc-drop-down {
@@ -1075,6 +1081,60 @@ a.rsc-media-box:focus {
     width: 120px;
 }
 
+/* list scroll */
+.rsc-list-scroll {
+    background-image: url(../public/list-scroll.png);
+    background-repeat: no-repeat;
+    width: 246px;
+    height: 383px;
+    margin: 0 auto 0 auto;
+    box-sizing: border-box;
+    padding-top: 11px;
+    padding-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.rsc-list-scroll-header {
+    height: 0;
+}
+
+.rsc-list-scroll-content {
+   height: 100%;
+   padding: 22px 32px 0 32px;
+   box-sizing: border-box;
+   text-shadow: 1px 1px 1px #000;
+}
+
+.rsc-list-scroll-centre {
+   display: flex;
+   align-self: center;
+   justify-content: center;
+}
+
+.rsc-list-scroll-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.rsc-list-scroll-list li {
+    display: block;
+}
+
+.rsc-list-scroll-list a {
+    color: inherit;
+    text-decoration: none;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    display: block;
+}
+
+.rsc-list-scroll-list a:hover,
+.rsc-list-scroll-list a:focus {
+    text-decoration: underline;
+}
+
 @media (max-width: 540px) {
     body {
         font-size: 14px;
@@ -1132,6 +1192,7 @@ a.rsc-media-box:focus {
     }
 
     .rsc-logo {
+        height: auto;
         width: 90%;
     }
 

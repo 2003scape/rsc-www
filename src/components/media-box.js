@@ -2,13 +2,15 @@ import Link from 'next/link';
 import React from 'react';
 
 export default function MediaBox(props) {
+    const smallImage = !!props.smallImage;
+
     const content = (
         <div className="rsc-box" style={{ padding: '8px' }}>
             {props.children[0]}
             <div className="rsc-row">
                 {props.src ? (
                     <div
-                        className="rsc-col rsc-col-50"
+                        className={`rsc-col rsc-col-${smallImage ? 36 : 50}`}
                         style={{
                             display: 'flex',
                             justifyContent: 'center',
@@ -19,7 +21,9 @@ export default function MediaBox(props) {
                     </div>
                 ) : undefined}
                 <div
-                    className={`rsc-col rsc-col-${props.src ? 50 : 100}`}
+                    className={`rsc-col rsc-col-${
+                        props.src ? (smallImage ? 64 : 50) : 100
+                    }`}
                     style={{
                         textAlign: props.src ? 'left' : 'center'
                     }}

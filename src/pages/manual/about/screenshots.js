@@ -14,25 +14,27 @@ function ScreenshotThumbnails(props) {
         <>
             {screenshots.map(({ section, images }) => {
                 return (
-                    <section className="rsc-thumbnails">
+                    <>
                         <h2>{section}</h2>
-                        {images.map(({ src, caption }) => {
-                            src = `/manual-images/screenshots/${src}`;
+                        <section className="rsc-box rsc-thumbnails">
+                            {images.map(({ src, caption }) => {
+                                src = `/manual-images/screenshots/${src}`;
 
-                            return (
-                                <figure className="rsc-image-thumbnail">
-                                    <ModalImage
-                                        small={src}
-                                        large={src}
-                                        alt={caption}
-                                    />
-                                    <figcaption>
-                                        <em>{caption}</em>
-                                    </figcaption>
-                                </figure>
-                            );
-                        })}
-                    </section>
+                                return (
+                                    <figure className="rsc-image-thumbnail">
+                                        <ModalImage
+                                            small={src}
+                                            large={src}
+                                            alt={caption}
+                                        />
+                                        <figcaption>
+                                            <em>{caption}</em>
+                                        </figcaption>
+                                    </figure>
+                                );
+                            })}
+                        </section>
+                    </>
                 );
             })}
         </>
@@ -55,9 +57,7 @@ export default function ManualScreenshots() {
                 </PageName>
                 <div className="rsc-row">
                     <div className="rsc-col rsc-col-75">
-                        <div className="rsc-box">
-                            <ScreenshotThumbnails screenshots={screenshots} />
-                        </div>
+                        <ScreenshotThumbnails screenshots={screenshots} />
                     </div>
                 </div>
             </Container>
