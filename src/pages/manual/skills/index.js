@@ -33,7 +33,7 @@ function getSkillEntry(skill) {
 
 export default function ManualSkills() {
     const content = (
-        <div class="rsc-row">
+        <div className="rsc-row">
             <div className="rsc-col rsc-col-50">
                 <div className="rsc-list-scroll">
                     <div className="rsc-list-scroll-content">

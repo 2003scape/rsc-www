@@ -1,5 +1,9 @@
 /* generic elements */
 
+html {
+    overflow-y: scroll;
+}
+
 body,
 button {
     background-color: #000;
@@ -77,6 +81,10 @@ hr {
 
 .rsc-centre-text {
     text-align: center;
+}
+
+.rsc-underline-text {
+    text-decoration: underline;
 }
 
 .rsc-left-text {
@@ -171,6 +179,11 @@ hr {
 .rsc-stone-box label {
     display: block;
     font-weight: bold;
+}
+
+h2.rsc-stone-box {
+    font-weight: inherit;
+    max-width: 150px;
 }
 
 .rsc-header {
@@ -299,8 +312,18 @@ hr {
     padding: 0 4% 0 4%;
 }
 
+.rsc-col-40 {
+    width: 40%;
+    padding: 0 2% 0 2%;
+}
+
 .rsc-col-50 {
     width: 50%;
+    padding: 0 2% 0 2%;
+}
+
+.rsc-col-60 {
+    width: 60%;
     padding: 0 2% 0 2%;
 }
 
@@ -808,7 +831,7 @@ tbody .rsc-hover-row {
     width: 100%;
     height: 10px;
     border: none;
-    margin: 8px 0 8px 0;
+    margin: 16px 0 16px 0;
 }
 
 .rsc-article-box img {
@@ -844,12 +867,20 @@ tbody .rsc-hover-row {
     text-decoration: underline;
 }
 
-.rsc-article-box ul {
-    padding-left: 16px;
+.rsc-article-box ul, .rsc-article-box ol {
+    padding: 0 12px 0 12px;
 }
 
 .rsc-article-box table {
-    min-width: 250px;
+    /*min-width: 250px;*/
+}
+
+.rsc-article-box h2:not(:first-child),
+.rsc-article-box h3,
+.rsc-article-box h4,
+.rsc-article-box h5,
+.rsc-article-box h6 {
+    margin: 8px 0 8px 0;
 }
 
 /* pop-up drop-down menu */
@@ -911,7 +942,8 @@ tbody .rsc-hover-row {
 
 .rsc-library-box:hover,
 .rsc-library-box:active {
-    text-decoration: underline;
+    /*text-decoration: underline;*/
+    filter: brightness(115%);
 }
 
 .rsc-library-right {
@@ -1054,11 +1086,6 @@ a.rsc-media-box:focus {
     filter: brightness(115%);
 }
 
-.rsc-media-box h2 {
-    font-weight: inherit;
-    max-width: 150px;
-}
-
 .rsc-media-box img {
     max-width: 100%;
 }
@@ -1149,24 +1176,53 @@ a.rsc-media-box:focus {
 /* skill table used in manuals */
 
 .rsc-skill-table {
-    width: 80%;
     overflow-x: auto;
-    margin: 4px auto 4px auto;
+    margin: 8px auto 8px auto;
+    width: 80%;
 }
 
 .rsc-skill-table table {
     width: 100%;
-    min-width: 240px;
+    margin: 0 auto 0 auto;
 }
 
 .rsc-skill-table th {
+    padding: 6px;
     background-color: #382418;
 }
 
 .rsc-skill-table th, .rsc-skill-table td {
-    padding: 6px;
     text-align: center;
+}
+
+.rsc-skill-table tbody tr:nth-child(odd) {
+    background-color: #131313;
+}
+
+.rsc-herb-table table, .rsc-fletching-table table {
+    width: 100%;
+}
+
+.rsc-cooking-table th, .rsc-cooking-table-td {
     width: 25%;
+}
+
+.rsc-herb-table th:nth-child(4), .rsc-fletching-table th:nth-child(2) {
+    width: 48px;
+}
+
+/* quest manuals */
+.rsc-quest-list {
+    list-style: none;
+    padding: 0 8px 0 8px;
+    margin: 0;
+    text-align: left;
+}
+
+.rsc-quest-list a {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    display: block;
 }
 
 @media (max-width: 540px) {
@@ -1389,6 +1445,14 @@ a.rsc-media-box:focus {
 
     .rsc-media-box .rsc-box {
         width: 100%;
+    }
+
+    .rsc-skill-table {
+        width: 100%;
+    }
+
+    .rsc-skill-table table {
+        min-width: 340px;
     }
 }
 

@@ -1,8 +1,9 @@
 import Container from '../../../components/container';
 import Header from '../../../components/header';
 import Link from 'next/link';
-import PageName from '../../../components/page-name';
 import ListScrollList from '../../../components/list-scroll-list';
+import PageName from '../../../components/page-name';
+import slug from 'slug';
 
 const PAGE_TITLE = 'Game Controls';
 
@@ -18,7 +19,7 @@ const CONTROL_SECTIONS = [
     'Banks',
     'Options'
 ].map((section) => {
-    return { name: section, href: `/manual/controls/${section.toLowerCase()}` };
+    return { name: section, href: `/manual/controls/${slug(section)}` };
 });
 
 export default function ManualControls() {

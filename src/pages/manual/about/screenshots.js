@@ -14,14 +14,17 @@ function ScreenshotThumbnails(props) {
         <>
             {screenshots.map(({ section, images }) => {
                 return (
-                    <>
+                    <div key={section}>
                         <h2>{section}</h2>
                         <section className="rsc-box rsc-thumbnails">
-                            {images.map(({ src, caption }) => {
+                            {images.map(({ src, caption }, i) => {
                                 src = `/manual-images/screenshots/${src}`;
 
                                 return (
-                                    <figure className="rsc-image-thumbnail">
+                                    <figure
+                                        className="rsc-image-thumbnail"
+                                        key={`${section}-${i}`}
+                                    >
                                         <ModalImage
                                             small={src}
                                             large={src}
@@ -34,7 +37,7 @@ function ScreenshotThumbnails(props) {
                                 );
                             })}
                         </section>
-                    </>
+                    </div>
                 );
             })}
         </>

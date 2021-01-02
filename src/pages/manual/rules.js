@@ -55,7 +55,7 @@ export default function ManualRules() {
                     </Link>
                 </PageName>
                 <div className="rsc-row">
-                    <div class="rsc-col rsc-col-100">
+                    <div className="rsc-col rsc-col-100">
                         <p>
                             To keep RuneScape enjoyable for everyone there
                             are&nbsp;<strong>eleven</strong> rules you must
