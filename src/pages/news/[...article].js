@@ -4,12 +4,11 @@ const markdown = require('markdown-it')({
     linkify: true
 });
 
-const slug = require('slug');
-
-import Container from '../../../components/container';
-import Header from '../../../components/header';
+import Container from '../../components/container';
+import Header from '../../components/header';
 import Link from 'next/link';
-import PageName from '../../../components/page-name';
+import PageName from '../../components/page-name';
+import slug from 'slug';
 
 const PAGE_TITLE = 'Latest News';
 

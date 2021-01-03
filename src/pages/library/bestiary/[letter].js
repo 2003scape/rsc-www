@@ -84,7 +84,7 @@ function MonsterDescription(props) {
                 <h3 id={slugged}>{props.name}</h3>
             </a>
             <img src={imageURL} alt={`Animated image of ${props.name}`} />
-            <dl>
+            <dl className="rsc-full-dl">
                 <div className="rsc-spaced-dl">
                     <dt>Height:</dt>
                     <dd>{props.height}</dd>
@@ -93,7 +93,7 @@ function MonsterDescription(props) {
                     <dd>{props.weight}</dd>
                     <div style={{ clear: 'left' }} />
                     <dt>Varieties:</dt>
-                    <dd className="rsc-newline-dd">
+                    <dd>
                         {props.levels
                             .map((level) => `Level ${level}`)
                             .join('\n')}
@@ -101,19 +101,19 @@ function MonsterDescription(props) {
                     <div style={{ clear: 'left' }} />
                 </div>
                 <dt>Locations:</dt>
-                <dd className="rsc-newline-dd">{props.locations.join('\n')}</dd>
+                <dd>{props.locations.join('\n')}</dd>
                 <div style={{ clear: 'left' }} />
                 <dt>Appearance:</dt>
-                <dd className="rsc-newline-dd">{props.appearance}</dd>
+                <dd>{props.appearance}</dd>
                 <div style={{ clear: 'left' }} />
                 <dt>Way of Life:</dt>
-                <dd className="rsc-newline-dd">{props.description}</dd>
+                <dd>{props.description}</dd>
                 <div style={{ clear: 'left' }} />
                 <dt>Likes:</dt>
-                <dd className="rsc-newline-dd">{props.likes}</dd>
+                <dd>{props.likes}</dd>
                 <div style={{ clear: 'left' }} />
                 <dt>Dislikes:</dt>
-                <dd className="rsc-newline-dd">{props.dislikes}</dd>
+                <dd>{props.dislikes}</dd>
                 <div style={{ clear: 'left' }} />
             </dl>
             <div style={{ clear: 'both' }} />

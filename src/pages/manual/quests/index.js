@@ -15,12 +15,11 @@ function QuestList(props) {
             {quests.map(({ name }, i) => {
                 return (
                     <li key={i}>
-                        <a
-                            className="rsc-link"
-                            href={`/manual/quests/${slug(name)}`}
-                        >
-                            {name}
-                        </a>
+                        <Link href={`/manual/quests/${slug(name)}`}>
+                            <a className="rsc-link">
+                                {name}
+                            </a>
+                        </Link>
                     </li>
                 );
             })}
@@ -34,16 +33,16 @@ export default function ManualQuests() {
     const content = (
         <div className="rsc-row">
             <div className="rsc-col rsc-col-36">
-                <div
+                <section
                     className="rsc-box"
                     style={{ paddingTop: '8px', height: '100%' }}
                 >
                     <h2 className="rsc-stone-box">Standard Quests</h2>
                     <QuestList quests={quests.free} />
-                </div>
+                </section>
             </div>
             <div className="rsc-col rsc-col-64">
-                <div
+                <section
                     className="rsc-box"
                     style={{ paddingTop: '8px', height: '100%' }}
                 >
@@ -63,7 +62,7 @@ export default function ManualQuests() {
                             />
                         </div>
                     </div>
-                </div>
+                </section>
             </div>
         </div>
     );
@@ -82,7 +81,7 @@ export default function ManualQuests() {
                 <div className="rsc-row">
                     <div className="rsc-col rsc-col-100">
                         {content}
-                        <br />
+                        <br className="rsc-hide-small" />
                     </div>
                 </div>
             </Container>

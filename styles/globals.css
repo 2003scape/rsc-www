@@ -103,6 +103,36 @@ hr {
     clear: both;
 }
 
+.rsc-newline-wrap {
+    white-space: pre-wrap;
+}
+
+.rsc-full-dl dt {
+    width: 25%;
+    float: left;
+    box-sizing: border-box;
+    margin-bottom: 8px;
+}
+
+.rsc-full-dl dd {
+    margin: 0;
+    float: left;
+    max-width: 75%;
+    margin-bottom: 8px;
+    box-sizing: border-box;
+    white-space: pre-wrap;
+}
+
+.rsc-spaced-dl dt {
+    margin-bottom: 32px;
+}
+
+.rsc-spaced-dl dd {
+    float: none;
+    margin-left: 25%;
+    text-align: left;
+}
+
 .rsc-link,
 .rsc-pagination a {
     text-decoration: none;
@@ -1020,36 +1050,6 @@ tbody .rsc-hover-row {
     padding-left: 8px;
 }
 
-.rsc-bestiary-info dl {
-    width: 100%;
-}
-
-.rsc-bestiary-info dt {
-    width: 25%;
-    float: left;
-}
-
-.rsc-bestiary-info dd {
-    margin: 0;
-    float: left;
-    max-width: 75%;
-    margin-bottom: 8px;
-}
-
-.rsc-spaced-dl dt {
-    margin-bottom: 32px;
-}
-
-.rsc-spaced-dl dd {
-    float: none;
-    margin-left: 25%;
-    text-align: left;
-}
-
-.rsc-newline-dd {
-    white-space: pre-wrap;
-}
-
 .rsc-bestiary-info:not(:last-child) {
     border-bottom: 1px solid rgb(128, 128, 128);
     margin-bottom: 16px;
@@ -1212,6 +1212,7 @@ a.rsc-media-box:focus {
 }
 
 /* quest manuals */
+
 .rsc-quest-list {
     list-style: none;
     padding: 0 8px 0 8px;
@@ -1223,6 +1224,44 @@ a.rsc-media-box:focus {
     padding-top: 2px;
     padding-bottom: 2px;
     display: block;
+}
+
+.rsc-quest-summary-col {
+    padding: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.rsc-quest-summary-col p {
+    text-align: left;
+    white-space: pre-wrap;
+}
+
+.rsc-quest-summary-image {
+    justify-content: right;
+}
+
+.rsc-quest-summary-image img {
+    max-height: 160px;
+    max-width: 100%;
+}
+
+.rsc-quest-dl {
+    max-width: 322px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.rsc-quest-dl dt {
+    width: 50%;
+    text-align: right;
+    padding-right: 4px;
+}
+
+.rsc-quest-dl dd {
+    width: 50%;
+    text-align: left;
+    padding-left: 4px;
 }
 
 @media (max-width: 540px) {
@@ -1409,20 +1448,22 @@ a.rsc-media-box:focus {
         display: block;
     }
 
-    .rsc-bestiary-info dt,
-    .rsc-bestiary-info dd {
+    .rsc-full-dl dt,
+    .rsc-full-dl dd {
         float: none;
         display: block;
         width: 100%;
         max-width: 100%;
+        text-align: left;
+        padding: 0;
     }
 
-    .rsc-bestiary-info dt {
+    .rsc-full-dl dt {
         font-weight: bold;
         margin-bottom: 8px;
     }
 
-    .rsc-bestiary-info dd {
+    .rsc-full-dl dd {
         margin-bottom: 16px;
         margin-left: 0;
     }
@@ -1453,6 +1494,18 @@ a.rsc-media-box:focus {
 
     .rsc-skill-table table {
         min-width: 340px;
+    }
+
+    .rsc-quest-summary-image {
+        justify-content: center;
+    }
+
+    .rsc-hide-small {
+        display: none;
+    }
+
+    .rsc-quest-dl {
+        max-width: 100%;
     }
 }
 

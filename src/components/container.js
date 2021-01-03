@@ -40,7 +40,7 @@ const SOCIAL_LINKS = [
 function SocialLinks(props) {
     return (
         <nav className="rsc-inline-links rsc-social-links">
-            <ul aria-label="Social media links">
+            <ul>
                 {props.links.map((props, i) => {
                     return (
                         <li key={i}>

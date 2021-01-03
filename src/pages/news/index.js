@@ -70,7 +70,7 @@ function CategoryLinks(props) {
 }
 
 function NewsArticle(props) {
-    const articleURL = `/news/article/${slug(props.title)}/${props.id}`;
+    const articleURL = `/news/${slug(props.title)}/${props.id}`;
 
     return (
         <div key={props.key}>
