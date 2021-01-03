@@ -30,7 +30,7 @@ export default function ManualEntry(props) {
                     </Link>
                 </PageName>
                 <div className="rsc-row">
-                    <div className="rsc-col rsc-col-75">
+                    <div className="rsc-col rsc-col-100" style={{maxWidth:'540px'}}>
                         <div
                             className="rsc-box rsc-article-box"
                             dangerouslySetInnerHTML={manualHTML}

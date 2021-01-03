@@ -898,7 +898,7 @@ tbody .rsc-hover-row {
 }
 
 .rsc-article-box ul, .rsc-article-box ol {
-    padding: 0 12px 0 12px;
+    padding: 0 14px 0 16px;
 }
 
 .rsc-article-box table {
@@ -1079,11 +1079,20 @@ tbody .rsc-hover-row {
 .rsc-media-box {
     text-decoration: none;
     color: inherit;
+    padding: 8px;
 }
 
 a.rsc-media-box:hover,
 a.rsc-media-box:focus {
     filter: brightness(115%);
+}
+
+.rsc-media-box .rsc-box {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
 .rsc-media-box img {
@@ -1478,6 +1487,10 @@ a.rsc-media-box:focus {
 
     .rsc-letters-name::before {
         display: none;
+    }
+
+    .rsc-media-box {
+        padding: 0;
     }
 
     .rsc-media-box p {

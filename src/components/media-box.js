@@ -5,30 +5,36 @@ export default function MediaBox(props) {
     const smallImage = !!props.smallImage;
 
     const content = (
-        <div className="rsc-box" style={{ padding: '8px' }}>
-            {props.children[0]}
-            <div className="rsc-row">
-                {props.src ? (
+        <div className="rsc-box">
+            <div>
+                {props.children[0]}
+                <div className="rsc-row">
+                    {props.src ? (
+                        <div
+                            className={`rsc-col rsc-col-${
+                                smallImage ? 36 : 50
+                            }`}
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                padding: '4px'
+                            }}
+                        >
+                            <img src={props.src} alt={props.alt} />
+                        </div>
+                    ) : undefined}
                     <div
-                        className={`rsc-col rsc-col-${smallImage ? 36 : 50}`}
+                        className={`rsc-col rsc-col-${
+                            props.src ? (smallImage ? 64 : 50) : 100
+                        }`}
                         style={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center'
+                            textAlign: props.src ? 'left' : 'center',
+                            padding: '0 4px 0 0'
                         }}
                     >
-                        <img src={props.src} alt={props.alt} />
+                        {props.children.slice(1)}
                     </div>
-                ) : undefined}
-                <div
-                    className={`rsc-col rsc-col-${
-                        props.src ? (smallImage ? 64 : 50) : 100
-                    }`}
-                    style={{
-                        textAlign: props.src ? 'left' : 'center'
-                    }}
-                >
-                    {props.children.slice(1)}
                 </div>
             </div>
         </div>

@@ -9,6 +9,7 @@ import rules from '@2003scape/rsc-manuals/rules';
 const PAGE_TITLE = 'Rules of Conduct';
 
 function RuleMediaBoxes(props) {
+    const { rules } = props;
     let rule = 0;
 
     return (
@@ -68,7 +69,14 @@ export default function ManualRules() {
                         </p>
                     </div>
                 </div>
-                <RuleMediaBoxes rules={rules} />
+                <div className="rsc-row">
+                    <div
+                        className="rsc-col rsc-col-100"
+                        style={{ maxWidth: '540px' }}
+                    >
+                        <RuleMediaBoxes rules={rules} />
+                    </div>
+                </div>
             </Container>
         </div>
     );

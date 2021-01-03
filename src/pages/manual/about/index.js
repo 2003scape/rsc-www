@@ -5,7 +5,6 @@ import MediaBox from '../../../components/media-box';
 import PageName from '../../../components/page-name';
 
 const PAGE_TITLE = 'About RuneScape';
-const DOWNLOADABLE_CLIENT = 'https://github.com/2003scape/mudclient204';
 
 export default function ManualAbout() {
     return (
