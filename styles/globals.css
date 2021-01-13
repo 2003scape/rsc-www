@@ -302,12 +302,19 @@ h2.rsc-stone-box {
     font-weight: bold;
     display: flex;
     align-items: center;
-    justify-content: right;
+    justify-content: center;
+}
+
+.rsc-form {
+    margin: 0 auto 0 auto;
 }
 
 .rsc-login-form {
     max-width: 484px;
-    margin: 0 auto 0 auto;
+}
+
+.rsc-login-form .rsc-form-label {
+    justify-content: right;
 }
 
 /* rows and cols */

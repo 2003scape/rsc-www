@@ -1,24 +1,16 @@
 const slug = require('slug');
 
+import CATEGORIES from '../../categories';
 import Container from '../../components/container';
 import Header from '../../components/header';
 import Link from 'next/link';
 import PageName from '../../components/page-name';
 import PaginationArrows from '../../components/pagination-arrows';
-import Router, { useRouter } from 'next/router';
+import { SessionContext } from '../../contexts/session';
+import { useContext } from 'react';
+import { useRouter } from 'next/router';
 
 const PAGE_TITLE = 'Latest News';
-
-const CATEGORIES = {
-    0: { name: 'All Categories', colour: 'white' },
-    1: { name: 'Game Updates', colour: 'red' },
-    2: { name: 'Website', colour: 'light-blue' },
-    3: { name: 'Customer Support', colour: 'yellow' },
-    4: { name: 'Technical', colour: 'dark-blue' },
-    5: { name: 'Community', colour: 'green' },
-    6: { name: 'Behind the Scenes', colour: 'purple' },
-    7: { name: 'Polls', colour: 'pink' }
-};
 
 const CATEGORY_IDS = Object.keys(CATEGORIES).map(Number).sort();
 
@@ -106,11 +98,11 @@ export default function News(props) {
     const articles = props.articles;
 
     const page = !Number.isNaN(+router.query.page)
-        ? parseInt(router.query.page, 10)
+        ? Number.parseInt(router.query.page, 10)
         : 1;
 
     const selectedCategory = !Number.isNaN(+router.query.category)
-        ? parseInt(router.query.category, 10)
+        ? Number.parseInt(router.query.category, 10)
         : 0;
 
     const content = articles.length ? (
@@ -140,6 +132,19 @@ export default function News(props) {
         <p>No articles found</p>
     );
 
+    const { user } = useContext(SessionContext);
+
+    const addArticle =
+        user && user.rank === 3 ? (
+            <p className="rsc-centre-text" style={{ fontSize: '14px' }}>
+                <Link href="/news/write">
+                    <a className="rsc-link" style={{ display: 'block' }}>
+                        ➕ Write news article
+                    </a>
+                </Link>
+            </p>
+        ) : undefined;
+
     return (
         <div>
             <Header pageName={PAGE_TITLE} />
@@ -154,7 +159,10 @@ export default function News(props) {
                                 <br />
                             </div>
                         </div>
-                        <div className="rsc-box rsc-news-box">{content}</div>
+                        <div className="rsc-box rsc-news-box">
+                            {addArticle}
+                            {content}
+                        </div>
                     </div>
                 </div>
             </Container>

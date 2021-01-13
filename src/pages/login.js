@@ -51,7 +51,7 @@ export default function Login(props) {
                                 alt="Only enter your password on 2003scape.com"
                             />
                             {message}
-                            <div className="rsc-login-form">
+                            <div className="rsc-form rsc-login-form">
                                 <form
                                     action="/login"
                                     method="post"

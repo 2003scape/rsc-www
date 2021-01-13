@@ -1,0 +1,10 @@
+{
+    "0": { "name": "All Categories", "colour": "white" },
+    "1": { "name": "Game Updates", "colour": "red" },
+    "2": { "name": "Website", "colour": "light-blue" },
+    "3": { "name": "Customer Support", "colour": "yellow" },
+    "4": { "name": "Technical", "colour": "dark-blue" },
+    "5": { "name": "Community", "colour": "green" },
+    "6": { "name": "Behind the Scenes", "colour": "purple" },
+    "7": { "name": "Polls", "colour": "pink" }
+}
