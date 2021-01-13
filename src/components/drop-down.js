@@ -1,14 +1,21 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function DropDown(props) {
     const [isVisible, setVisible] = useState(false);
-
     const [oldButton] = props.children;
 
     const button = React.cloneElement(oldButton, {
         onClick: () => setVisible(!isVisible)
     });
+
+    useEffect(() => {
+        window.addEventListener('mouseup', () => {
+            if (isVisible) {
+                setVisible(false);
+            }
+        });
+    }, [isVisible]);
 
     return (
         <div className="rsc-drop-down">

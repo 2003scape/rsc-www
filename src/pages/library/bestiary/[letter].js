@@ -15,8 +15,7 @@ for (let i = 97; i <= 122; i += 1) {
 
 function LetterLink(props) {
     const { selected, letter } = props;
-    const title =
-        'View monsters beginning with the letter ' + letter.toUpperCase();
+    const title = `View monsters beginning with the letter ${letter.toUpperCase()}`;
 
     return (
         <Link href={`/library/bestiary/${letter}`}>
@@ -40,16 +39,14 @@ function LetterLinks(props) {
                 <br />
                 <nav className="rsc-inline-links rsc-category-links">
                     <ul aria-label="Choose a letter">
-                        {LETTERS.map((letter, i) => {
-                            return (
-                                <li key={i}>
-                                    <LetterLink
-                                        selected={props.letter}
-                                        letter={letter}
-                                    />
-                                </li>
-                            );
-                        })}
+                        {LETTERS.map((letter, i) => (
+                            <li key={i}>
+                                <LetterLink
+                                    selected={props.letter}
+                                    letter={letter}
+                                />
+                            </li>
+                        ))}
                     </ul>
                 </nav>
                 <br />
@@ -61,15 +58,11 @@ function LetterLinks(props) {
 function NoneCatalogued(props) {
     return (
         <>
-            <br />
-            <br />
-            <p>
+            <p style={{ marginTop: '32px', marginBottom: '32px' }}>
                 No creatures beginning with&nbsp;
                 <strong>{props.letter.toUpperCase()}</strong> have been
                 catalogued for the Library Of Varrock... yet.
             </p>
-            <br />
-            <br />
         </>
     );
 }
