@@ -1,3 +1,5 @@
+require('isomorphic-fetch');
+
 const markdown = require('markdown-it')({
     breaks: true,
     html: true,
@@ -9,6 +11,8 @@ import Header from '../../components/header';
 import Link from 'next/link';
 import PageName from '../../components/page-name';
 import slug from 'slug';
+import { SessionContext } from '../../contexts/session';
+import { useContext } from 'react';
 
 const PAGE_TITLE = 'Latest News';
 
@@ -24,6 +28,22 @@ export default function NewsArticle(props) {
     const pageTitle = `${props.article.title} - ${PAGE_TITLE}`;
     const articleHTML = { __html: markdown.render(props.article.body) };
 
+    const { user } = useContext(SessionContext);
+
+    const editArticle =
+        user && user.rank === 3 ? (
+            <>
+                <p className="rsc-centre-text" style={{ fontSize: '14px' }}>
+                    <Link href={`/news/write?id=${props.article.id}`}>
+                        <a className="rsc-link" style={{ display: 'block' }}>
+                            ➕ Edit news article
+                        </a>
+                    </Link>
+                </p>
+                <hr />
+            </>
+        ) : undefined;
+
     return (
         <div>
             <Header pageName={pageTitle} />
@@ -38,6 +58,7 @@ export default function NewsArticle(props) {
                 <div className="rsc-row">
                     <div className="rsc-col rsc-col-100">
                         <main className="rsc-box rsc-article-box">
+                            {editArticle}
                             <h1>
                                 <time>
                                     {formateDate(

@@ -154,7 +154,8 @@ function applyAPI(server, dataClient) {
                 title: req.body.title || 'Untitled',
                 body: req.body.body || '<no body>',
                 date: Math.floor(new Date(req.body.date) / 1000),
-                category: Number.parseInt(req.body.category) || 0
+                category: Number.parseInt(req.body.category) || 0,
+                id: Number.parseInt(req.body.id, 10) || undefined
             })
             .then(({ success }) => {
                 if (success) {

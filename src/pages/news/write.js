@@ -22,7 +22,16 @@ const MDEditor = dynamic(() => import('react-markdown-editor-lite'), {
 const PAGE_TITLE = 'Write Article';
 
 export default function NewsWrite(props) {
-    const { token, user } = useContext(SessionContext);
+    const { token } = useContext(SessionContext);
+
+    const article = props.article || {};
+    const title = article.title || '';
+    const category = article.category || 0;
+    const [body, setBody] = useState(article.body || '');
+
+    const date = new Date(
+        article.date ? article.date * 1000 : Date.now()
+    ).toLocaleDateString('en-ca');
 
     const onSubmit = (event) => {
         setTimeout(() => {
@@ -35,6 +44,7 @@ export default function NewsWrite(props) {
         <div className="rsc-form">
             <form action="/news/write" method="post" onSubmit={onSubmit}>
                 <input type="hidden" name="_csrf" value={token} />
+                <input type="hidden" name="id" value={article.id} />
                 <div className="rsc-row">
                     <label
                         htmlFor="rsc-news-title"
@@ -50,6 +60,7 @@ export default function NewsWrite(props) {
                             id="rsc-news-title"
                             type="text"
                             required={true}
+                            defaultValue={title}
                         />
                     </div>
                 </div>
@@ -66,11 +77,12 @@ export default function NewsWrite(props) {
                             className="rsc-input"
                             id="rsc-news-category"
                             name="category"
+                            defaultValue={category}
                         >
                             {Object.entries(CATEGORIES)
                                 .filter(([id]) => id > 0)
                                 .map(([id, { name }]) => (
-                                    <option key={id} value={id - 1}>
+                                    <option key={id} defaultValue={id - 1}>
                                         {name}
                                     </option>
                                 ))}
@@ -89,9 +101,7 @@ export default function NewsWrite(props) {
                         <input
                             className="rsc-input"
                             id="rsc-news-date"
-                            defaultValue={new Date().toLocaleDateString(
-                                'en-ca'
-                            )}
+                            defaultValue={date}
                             type="date"
                             name="date"
                         />
@@ -102,11 +112,14 @@ export default function NewsWrite(props) {
                     <div className="rsc-col rsc-col-100">
                         <MDEditor
                             name="body"
-                            style={{
-                                height: '400px',
-                                filter: 'invert(100%)'
-                            }}
+                            style={{ height: '400px' }}
                             renderHTML={(text) => markdown.render(text)}
+                            onChange={({ text }) => setBody(text)}
+                            config={{
+                                htmlClass:
+                                    'custom-html-style rsc-markdown-preview'
+                            }}
+                            value={body}
                         />
                     </div>
                 </div>
@@ -131,7 +144,7 @@ export default function NewsWrite(props) {
                 <PageName pageName={PAGE_TITLE}>
                     <Link href="/news">
                         <a className="rsc-link rsc-small-block rsc-small-spaced">
-                            Latest News
+                            All News
                         </a>
                     </Link>
                 </PageName>
@@ -148,10 +161,39 @@ export default function NewsWrite(props) {
     );
 }
 
-export function getServerSideProps({ req, query }) {
+export async function getServerSideProps({ req, query }) {
     if (!req.session.user || req.session.user.rank !== 3) {
         return { notFound: true };
     }
 
-    return { props: {} };
+    const props = {};
+
+    const id =
+        query.id && !Number.isNaN(+query.id)
+            ? Number.parseInt(query.id, 10)
+            : undefined;
+
+    if (id) {
+        const response = await fetch(`${process.env.url}api/news?id=${id}`);
+
+        if (response.ok) {
+            const json = await response.json();
+
+            if (!json) {
+                return { notFound: true };
+            }
+
+            const article = json.articles;
+
+            if (!article) {
+                return { notFound: true };
+            }
+
+            props.article = article;
+        } else {
+            return { notFound: true };
+        }
+    }
+
+    return { props };
 }

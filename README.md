@@ -15,7 +15,7 @@ saving/loading and interacting with the game worlds. it supports TCP with
 TLS or IPC [domain sockets](https://en.wikipedia.org/wiki/Unix_domain_socket).
 
 ## license
-Copyright (C) 2020 2003Scape Team
+Copyright (C) 2021 2003Scape Team
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as

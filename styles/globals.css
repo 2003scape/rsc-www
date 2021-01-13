@@ -908,10 +908,6 @@ tbody .rsc-hover-row {
     padding: 0 14px 0 16px;
 }
 
-.rsc-article-box table {
-    /*min-width: 250px;*/
-}
-
 .rsc-article-box h2:not(:first-child),
 .rsc-article-box h3,
 .rsc-article-box h4,
@@ -966,6 +962,7 @@ tbody .rsc-hover-row {
 }
 
 /* library */
+
 .rsc-library-box h2 {
     margin: 0;
 }
@@ -993,6 +990,7 @@ tbody .rsc-hover-row {
 }
 
 /* tiled, dynamic height scroll */
+
 .rsc-tiled-scroll {
     background-image: url(../public/scroll-background.png);
     background-repeat: repeat-y;
@@ -1035,6 +1033,7 @@ tbody .rsc-hover-row {
 }
 
 /* bestiary */
+
 .rsc-bestiary-info {
     text-align: left;
 }
@@ -1283,6 +1282,10 @@ a.rsc-media-box:focus {
 .rsc-map {
     width: 100%;
     height: 400px;
+}
+
+.rsc-markdown-preview {
+    text-align: left;
 }
 
 @media (max-width: 540px) {

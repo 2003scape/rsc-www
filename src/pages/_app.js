@@ -15,9 +15,7 @@ function App({ Component, pageProps, props }) {
 
 App.getInitialProps = async function ({ ctx: { req } }) {
     const response = await fetch(`${process.env.url}api/session`, {
-        headers: {
-            cookie: req ? req.get('cookie') : undefined
-        }
+        headers: { cookie: req ? req.get('cookie') : undefined }
     });
 
     if (response.ok) {

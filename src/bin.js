@@ -69,19 +69,12 @@ bole.output({
     }
 
     const app = next({ dev: process.env.NODE_ENV !== 'production' });
-
     await app.prepare();
 
     const server = express();
     const handle = app.getRequestHandler();
 
-    server.use(
-        cookieSession({
-            name: 'session',
-            secret: require('./secret')
-        })
-    );
-
+    server.use(cookieSession({ name: 'session', secret: require('./secret') }));
     server.use(bodyParser.urlencoded({ extended: true }));
     server.use(csrf());
 
@@ -124,7 +117,13 @@ bole.output({
             .catch((err) => log.error(err));
     });
 
+    server.get('/logout', (req, res) => {
+        delete req.session.user;
+        res.redirect('/');
+    });
+
     applyAPI(server, dataClient);
+
     server.all('*', handle);
 
     server.listen(config.port, (err) => {
