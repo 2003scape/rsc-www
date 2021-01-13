@@ -87,7 +87,10 @@ export default function ManualGuides() {
                     </Link>
                 </PageName>
                 <div className="rsc-row">
-                    <div className="rsc-col rsc-col-100" style={{maxWidth:'540px'}}>
+                    <div
+                        className="rsc-col rsc-col-100"
+                        style={{ maxWidth: '540px' }}
+                    >
                         <GuideMediaBoxes guides={GUIDE_SECTIONS} />
                     </div>
                 </div>

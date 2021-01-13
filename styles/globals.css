@@ -1273,6 +1273,11 @@ a.rsc-media-box:focus {
     padding-left: 4px;
 }
 
+.rsc-map {
+    width: 100%;
+    height: 400px;
+}
+
 @media (max-width: 540px) {
     body {
         font-size: 14px;
@@ -1519,6 +1524,10 @@ a.rsc-media-box:focus {
 
     .rsc-quest-dl {
         max-width: 100%;
+    }
+
+    .rsc-map {
+        height: 255px;
     }
 }
 
