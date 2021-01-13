@@ -35,11 +35,10 @@ function applyAPI(server, dataClient) {
         MEMOIZE_OPTIONS
     );
 
-    const getGodLetter = dataClient.getGodLetter.bind(dataClient);
-    /*memoize(
+    const getGodLetter = memoize(
         dataClient.getGodLetter.bind(dataClient),
         MEMOIZE_OPTIONS
-    );*/
+    );
 
     // we want to save files forever
     const getFile = memoize(dataClient.getFile.bind(dataClient), {
@@ -143,6 +142,31 @@ function applyAPI(server, dataClient) {
                 }
             })
             .catch((err) => next(err));
+    });
+
+    server.post('/news/write', (req, res, next) => {
+        if (!req.session.user || req.session.user.rank !== 3) {
+            return next();
+        }
+
+        dataClient
+            .addNews({
+                title: req.body.title || 'Untitled',
+                body: req.body.body || '<no body>',
+                date: Math.floor(new Date(req.body.date) / 1000),
+                category: Number.parseInt(req.body.category) || 0
+            })
+            .then(({ success }) => {
+                if (success) {
+                    getNews.clear();
+                    res.redirect('/news');
+                } else {
+                    next();
+                }
+            })
+            .catch((e) => {
+                next(e);
+            });
     });
 
     server.get('/api/god-letters', (req, res, next) => {
