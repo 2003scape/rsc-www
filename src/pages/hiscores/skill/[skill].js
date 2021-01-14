@@ -8,7 +8,7 @@ import HiscoreControls from '../../../components/hiscore-controls';
 import Link from 'next/link';
 import PageName from '../../../components/page-name';
 import PaginationArrows from '../../../components/pagination-arrows';
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import SkillIcon from '../../../components/skill-icon';
 import SkillList from '../../../components/skill-list';
 import { formatUsername } from '../../../username';

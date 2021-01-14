@@ -19,7 +19,7 @@ const WHEEL_LINKS = [
         title: 'Questions? Contact our staff.'
     },
     {
-        href: '/support',
+        href: '/messages',
         name: 'Message Centre',
         title: 'Your messages from our staff.'
     },

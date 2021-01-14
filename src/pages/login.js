@@ -5,13 +5,16 @@ import PageName from '../components/page-name';
 import UsernameInput from '../components/username-input';
 import { SessionContext } from '../contexts/session';
 import { useContext, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 const PAGE_TITLE = 'Secure Login';
 
 export default function Login(props) {
-    const { token, storeUser } = useContext(SessionContext);
+    const { token } = useContext(SessionContext);
+    const router = useRouter();
+    const redirect = router.query.to;
 
-    const askLogin = props.askLogin ? (
+    const askLogin = redirect ? (
         <p>
             <strong className="rsc-caution-text">
                 You need to login to access this feature
@@ -61,6 +64,11 @@ export default function Login(props) {
                                         type="hidden"
                                         name="_csrf"
                                         value={token}
+                                    />
+                                    <input
+                                        type="hidden"
+                                        name="redirect"
+                                        value={redirect}
                                     />
                                     <div className="rsc-row">
                                         <label

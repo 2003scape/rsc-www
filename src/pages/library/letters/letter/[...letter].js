@@ -49,7 +49,7 @@ export async function getServerSideProps({ query }) {
     }
 
     const id = !Number.isNaN(+query.letter[1])
-        ? parseInt(query.letter[1], 10)
+        ? Number.parseInt(query.letter[1], 10)
         : undefined;
 
     if (typeof id !== 'number') {

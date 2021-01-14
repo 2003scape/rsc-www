@@ -107,7 +107,7 @@ bole.output({
                     }
 
                     req.session.user = { username, id, rank };
-                    res.redirect('/');
+                    res.redirect(req.body.redirect || '/');
                     return;
                 }
 
