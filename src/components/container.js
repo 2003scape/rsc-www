@@ -61,12 +61,25 @@ function SocialLinks(props) {
 export default function Container(props) {
     const { user } = useContext(SessionContext);
     const isLoggedIn = user && user.id;
+    const isModerator = user && user.rank === 3;
+
+    const crown = isModerator ? (
+        <>
+            <img
+                style={{ verticalAlign: 'middle' }}
+                src="/moderator-crown.png"
+                alt="Moderator crown"
+            />
+            &nbsp;
+        </>
+    ) : undefined;
 
     const userLink = isLoggedIn ? (
         <>
             Logged in as&nbsp;
             <DropDown>
                 <button className="rsc-link">
+                    {crown}
                     {formatUsername(user.username)}
                 </button>
                 <a href="#">Account Management</a>

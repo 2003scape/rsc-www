@@ -30,8 +30,21 @@ export default function NewsArticle(props) {
 
     const { user } = useContext(SessionContext);
 
-    const editArticle =
-        user && user.rank === 3 ? (
+    let editArticle;
+
+    if (user && user.rank === 3) {
+        const confirmDelete = (event) => {
+            if (
+                !window.confirm(
+                    `Are you sure you wish to delete "${props.article.title}"?`
+                )
+            ) {
+                event.preventDefault();
+                return false;
+            }
+        };
+
+        editArticle = (
             <>
                 <p className="rsc-centre-text" style={{ fontSize: '14px' }}>
                     <Link href={`/news/write?id=${props.article.id}`}>
@@ -39,10 +52,20 @@ export default function NewsArticle(props) {
                             ➕ Edit news article
                         </a>
                     </Link>
+                    <br />
+                    <a
+                        href={`/api/news?id=${props.article.id}&delete=true`}
+                        className="rsc-link"
+                        style={{ display: 'block' }}
+                        onClick={confirmDelete}
+                    >
+                        ❌ Delete news article
+                    </a>
                 </p>
                 <hr />
             </>
-        ) : undefined;
+        );
+    }
 
     return (
         <div>

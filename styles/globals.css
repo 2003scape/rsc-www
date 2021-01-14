@@ -928,15 +928,15 @@ tbody .rsc-hover-row {
     display: none;
     list-style: none;
     position: absolute;
-    top: 125%;
-    width: 154px;
-    left: -200%;
     text-align: center;
     border: 2px solid #382418;
     background-color: #000;
-    margin-top: 8px;
     border-radius: 4px;
     padding: 0;
+    width: 150px;
+    right: 75px; /* 150 / 2 */
+    margin-right: calc(50% - 150px);
+    top: 4px;
 }
 
 .rsc-drop-down-links li a {

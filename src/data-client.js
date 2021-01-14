@@ -155,6 +155,10 @@ class DataClient {
         return await this.sendAndReceive({ handler: 'addNews', ...article });
     }
 
+    async deleteNews(id) {
+        return await this.sendAndReceive({ handler: 'deleteNews', id });
+    }
+
     async getGodLetter(id) {
         return await this.sendAndReceive({ handler: 'getGodLetter', id });
     }

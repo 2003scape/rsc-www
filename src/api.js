@@ -111,6 +111,24 @@ function applyAPI(server, dataClient) {
 
         if (typeof query.id !== 'undefined') {
             query.id = Number(query.id);
+
+            if (req.query.delete) {
+                dataClient
+                    .deleteNews(query.id)
+                    .then(({ success }) => {
+                        if (success) {
+                            getNews.clear();
+                            res.redirect('/news');
+                        } else {
+                            next();
+                        }
+                    })
+                    .catch((e) => {
+                        next(e);
+                    });
+
+                return;
+            }
         }
 
         if (query.terms) {
@@ -154,7 +172,7 @@ function applyAPI(server, dataClient) {
                 title: req.body.title || 'Untitled',
                 body: req.body.body || '<no body>',
                 date: Math.floor(new Date(req.body.date) / 1000),
-                category: Number.parseInt(req.body.category) || 0,
+                category: Number.parseInt(req.body.category, 10) || 0,
                 id: Number.parseInt(req.body.id, 10) || undefined
             })
             .then(({ success }) => {

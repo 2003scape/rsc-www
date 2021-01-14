@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 export default function DropDown(props) {
     const [isVisible, setVisible] = useState(false);
+
     const [oldButton] = props.children;
 
     const button = React.cloneElement(oldButton, {
@@ -11,11 +12,9 @@ export default function DropDown(props) {
 
     useEffect(() => {
         window.addEventListener('mouseup', () => {
-            if (isVisible) {
-                setVisible(false);
-            }
+            setVisible(false);
         });
-    }, [isVisible]);
+    }, []);
 
     return (
         <div className="rsc-drop-down">
