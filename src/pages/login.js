@@ -4,7 +4,7 @@ import Link from 'next/link';
 import PageName from '../components/page-name';
 import UsernameInput from '../components/username-input';
 import { SessionContext } from '../contexts/session';
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { useRouter } from 'next/router';
 
 const PAGE_TITLE = 'Secure Login';

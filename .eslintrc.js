@@ -1,16 +1,17 @@
 module.exports = {
     env: {
         node: true,
-        commonjs: true,
+        browser: true,
+        commonjs: false,
         es6: true
     },
-    extends: 'eslint:recommended',
+    extends: ['eslint:recommended', 'plugin:react/recommended'],
     parserOptions: {
         ecmaVersion: 2018,
-        sourceType: 'module',
         ecmaFeatures: {
             jsx: true
-        }
+        },
+        sourceType: 'module'
     },
     rules: {
         indent: [
@@ -22,13 +23,11 @@ module.exports = {
         ],
         'linebreak-style': ['error', 'unix'],
         semi: ['error', 'always'],
-        'no-constant-condition': [
-            'error',
-            {
-                checkLoops: false
-            }
-        ],
-        'require-atomic-updates': 0,
-        'no-prototype-builtins': 0
+        'no-prototype-builtins': 0,
+        'react/react-in-jsx-scope': 'off',
+        'react/prop-types': 0
+    },
+    settings: {
+        react: { version: 'detect' }
     }
 };

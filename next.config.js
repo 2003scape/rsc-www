@@ -1,5 +1,7 @@
+const config = require('./config');
+
 module.exports = {
-    env: { url: 'http://localhost:1338/' },
+    env: { url: config.baseURL },
     async redirects() {
         return [
             {

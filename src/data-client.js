@@ -66,8 +66,8 @@ class DataClient {
     handleMessage(message) {
         log.debug('received message', message);
 
-        switch (message.handler) {
-        }
+        /*switch (message.handler) {
+        }*/
     }
 
     send(message) {
@@ -161,6 +161,15 @@ class DataClient {
 
     async getGodLetter(id) {
         return await this.sendAndReceive({ handler: 'getGodLetter', id });
+    }
+
+    async getPlayerMessages({ playerID, id, page }) {
+        return await this.sendAndReceive({
+            handler: 'getPlayerMessages',
+            playerID,
+            id,
+            page
+        });
     }
 
     async getFile(name) {

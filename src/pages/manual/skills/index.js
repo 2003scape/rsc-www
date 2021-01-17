@@ -2,7 +2,6 @@ import Container from '../../../components/container';
 import Header from '../../../components/header';
 import Link from 'next/link';
 import PageName from '../../../components/page-name';
-import manuals from '@2003scape/rsc-manuals';
 import ListScrollList from '../../../components/list-scroll-list';
 
 const PAGE_TITLE = 'Skills';

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import PageName from '../components/page-name';
 
 function GameSelectButton(props) {
-    const type = props.type;
+    const { type } = props;
 
     return (
         <div className={`rsc-game-select rsc-select-${type}`}>
@@ -23,13 +23,12 @@ function GameSelectButton(props) {
     );
 }
 
-export default function Play(props) {
+export default function Play() {
     return (
         <div>
             <Header pageName="Select Game Type" />
             <Container>
                 <PageName pageName="Select Game Type" />
-
                 <section className="rsc-game-select-wrap">
                     <GameSelectButton type="free" />
                     <GameSelectButton type="members" />
@@ -37,7 +36,7 @@ export default function Play(props) {
                 <div className="rsc-scroll">
                     <label htmlFor="rsc-client-type">
                         Select client version - only change this if the default
-                        doesn't work
+                        doesn&apos;t work
                     </label>
                     <br />
                     <select id="rsc-client-type">

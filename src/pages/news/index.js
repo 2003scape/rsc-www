@@ -1,11 +1,11 @@
-const slug = require('slug');
-
 import CATEGORIES from '../../categories';
 import Container from '../../components/container';
 import Header from '../../components/header';
 import Link from 'next/link';
 import PageName from '../../components/page-name';
 import PaginationArrows from '../../components/pagination-arrows';
+import formatDate from '../../format-date';
+import slug from 'slug';
 import { SessionContext } from '../../contexts/session';
 import { useContext } from 'react';
 import { useRouter } from 'next/router';
@@ -13,17 +13,6 @@ import { useRouter } from 'next/router';
 const PAGE_TITLE = 'Latest News';
 
 const CATEGORY_IDS = Object.keys(CATEGORIES).map(Number).sort();
-
-function formatDate(date) {
-    return date
-        .toLocaleString('en-gb', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric'
-        })
-        .replace(/ /g, '-')
-        .replace(/,/g, '');
-}
 
 function CategoryLink(props) {
     const { colour, name } = CATEGORIES[props.id];
@@ -42,7 +31,7 @@ function CategoryLink(props) {
 }
 
 function CategoryLinks(props) {
-    const selected = props.selected;
+    const { selected } = props;
 
     return (
         <nav className="rsc-inline-links rsc-category-links">
@@ -65,7 +54,7 @@ function NewsArticle(props) {
     const articleURL = `/news/${slug(props.title)}/${props.id}`;
 
     return (
-        <div key={props.key}>
+        <div key={props.id}>
             <article className="rsc-row">
                 <CategoryLink
                     className="rsc-col rsc-col-25 rsc-article-category"
@@ -95,7 +84,7 @@ function NewsArticle(props) {
 
 export default function News(props) {
     const router = useRouter();
-    const articles = props.articles;
+    const { articles, pages: totalPages } = props;
 
     const page = !Number.isNaN(+router.query.page)
         ? Number.parseInt(router.query.page, 10)
@@ -118,18 +107,18 @@ export default function News(props) {
                     Date
                 </strong>
             </div>
-            {articles.map((article, i) => NewsArticle({ ...article, key: i }))}
+            {articles.map((article) => NewsArticle(article))}
             <br />
             <PaginationArrows
                 url="/news"
                 page={page}
-                totalPages={props.pages}
+                totalPages={totalPages}
                 query={{ category: selectedCategory }}
             />
             <br />
         </>
     ) : (
-        <p>No articles found</p>
+        <p>No articles found.</p>
     );
 
     const { user } = useContext(SessionContext);

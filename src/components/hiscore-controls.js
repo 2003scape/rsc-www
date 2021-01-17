@@ -67,7 +67,7 @@ function NameCompare(props) {
     );
 }
 
-export default function HiscoreControls(props) {
+export default function HiscoreControls() {
     const router = useRouter();
 
     const skill = router.query.skill || 'overall';

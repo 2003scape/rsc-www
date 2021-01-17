@@ -35,6 +35,8 @@
   "description": "modern, mobile-friendly recreation of the runescape classic website",
   "main": "app.js",
   "devDependencies": {
+    "eslint": "^7.18.0",
+    "eslint-plugin-react": "^7.22.0",
     "garnish": "^5.2.0"
   },
   "repository": {

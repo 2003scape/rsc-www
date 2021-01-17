@@ -62,8 +62,8 @@ export default function ManualRules() {
                             are&nbsp;<strong>eleven</strong> rules you must
                             observe.
                             <br />
-                            We won't tolerate disruptive players, and if you
-                            break our rules you will be banned. <br />
+                            We won&apos;t tolerate disruptive players, and if
+                            you break our rules you will be banned.<br />
                             Members who are banned for breaking our rules are
                             not entitled to any sort of refund.
                         </p>

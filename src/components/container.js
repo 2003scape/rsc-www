@@ -82,7 +82,7 @@ export default function Container(props) {
                     {crown}
                     {formatUsername(user.username)}
                 </button>
-                <a href="#">Account Management</a>
+                <a href="/support">Account Support</a>
                 <a href={`/hiscores?name=${user.username}`}>Hiscores</a>
                 <a href="/logout">Logout</a>
             </DropDown>

@@ -156,7 +156,8 @@ export default function Hiscores(props) {
         content = (
             <div className="rsc-col rsc-col-75 rsc-box">
                 <p>
-                    Player <em>"{!ranks ? username : opponentName}"</em> not
+                    Player&nbsp;
+                    <em>&quot;{!ranks ? username : opponentName}&quot;</em> not
                     found.
                 </p>
             </div>

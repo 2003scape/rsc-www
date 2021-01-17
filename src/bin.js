@@ -68,7 +68,7 @@ bole.output({
         return;
     }
 
-    const app = next({ dev: process.env.NODE_ENV !== 'production' });
+    const app = next({ dev: config.development });
     await app.prepare();
 
     const server = express();

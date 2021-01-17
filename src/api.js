@@ -191,7 +191,7 @@ function applyAPI(server, dataClient) {
     server.get('/api/god-letters', (req, res, next) => {
         const id =
             req.query.id && !Number.isNaN(+req.query.id)
-                ? parseInt(req.query.id, 10)
+                ? Number.parseInt(req.query.id, 10)
                 : undefined;
 
         res.setHeader('content-type', 'application/json');
