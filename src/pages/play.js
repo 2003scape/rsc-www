@@ -1,52 +1,44 @@
+import React, { useEffect } from 'react';
 import Container from '../components/container';
 import Header from '../components/header';
-import Link from 'next/link';
-import PageName from '../components/page-name';
-
-function GameSelectButton(props) {
-    const { type } = props;
-
-    return (
-        <div className={`rsc-game-select rsc-select-${type}`}>
-            <Link href="https://rs2003.com/play">
-                <a className="rsc-select-button">
-                    <small>Click here for</small>
-
-                    <strong>
-                        {type}
-                        <br />
-                        game
-                    </strong>
-                </a>
-            </Link>
-        </div>
-    );
-}
 
 export default function Play() {
+
+    const gameScreen = async (mcContainer) => {
+        const args = window.location.hash.slice(1).split(',');
+        const mc = new window.mudclient(mcContainer);
+
+        window.mcOptions = mc.options;
+
+        Object.assign(mc.options, {
+            middleClickCamera: true,
+            mouseWheel: true,
+            resetCompass: true,
+            zoomCamera: true,
+            accountManagement: true,
+            mobile: false
+        });
+
+        mc.members = args[0] === 'members';
+        mc.server = args[1] ? args[1] : '127.0.0.1';
+        mc.port = args[2] && !isNaN(+args[2]) ? +args[2] : 43595;
+
+        mc.threadSleep = 10;
+        await mc.startApplication(512, 346, 'Runescape by Andrew Gower');
+    }
+
+    useEffect(() => {
+        const mcContainer = document.getElementById('game-container');
+        if (mcContainer && window && window.mudclient) {
+            gameScreen(mcContainer)
+        }
+    }, [])
+
     return (
         <div>
             <Header pageName="Select Game Type" />
             <Container>
-                <PageName pageName="Select Game Type" />
-                <section className="rsc-game-select-wrap">
-                    
-                </section>
-                <div className="rsc-scroll">
-                    <label htmlFor="rsc-client-type">
-                        Select client version - only change this if the default
-                        doesn&apos;t work
-                    </label>
-                    <br />
-                    <select id="rsc-client-type">
-                        <option value="web">
-                            Web Client Using JavaScript (Recommended)
-                        </option>
-                        <option value="download">
-                            Desktop Client Using Java
-                        </option>
-                    </select>
-                </div>
+                <div id="game-container" style={{ margin: '0 auto' }} />
             </Container>
         </div>
     );
