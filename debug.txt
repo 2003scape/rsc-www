@@ -1,0 +1,12 @@
+
+> @2003scape/rsc-www@1.0.0 build
+> next build
+
+info  - Creating an optimized production build...
+info  - Compiled successfully
+info  - Collecting page data...
+info  - Generating static pages (0/110)
+info  - Generating static pages (27/110)
+info  - Generating static pages (54/110)
+info  - Generating static pages (82/110)
+info  - Generating static pages (110/110)

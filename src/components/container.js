@@ -6,10 +6,16 @@ import { useContext } from 'react';
 
 const SOCIAL_LINKS = [
     {
+        name: 'Home',
+        href: '/',
+        image: 'home.png',
+        title: 'Homepage'
+    },
+    {
         name: 'GitHub',
         href: 'https://github.com/rsc2003',
         image: '/social/github.png',
-        title: 'Fork us on GitHub!'
+        title: 'Find us on GitHub!'
     },
     {
         name: 'Discord',
@@ -18,16 +24,10 @@ const SOCIAL_LINKS = [
         title: 'Chat with the rsc2003 community on Discord'
     },
     {
-        name: 'twitter',
-        href: 'https://www.youtube.com/channel/UCOVznMz6bUC-v2zzy7d2m3w',
+        name: 'Twitter',
+        href: 'https://twitter.com/rsc2003',
         image: '/social/twitter.png',
         title: 'rsc2003.com on twitter'
-    },
-    {
-        name: 'RuneScape Classic Wiki',
-        href: 'https://classic.runescape.wiki',
-        image: '/social/wiki.png',
-        title: 'Collaborate with other RuneScape Classic enthusaists'
     }
 ];
 

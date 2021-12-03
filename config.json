@@ -3,7 +3,6 @@
     "dataServerTCP": "http://45.56.68.65",
     "dataServerPassword": "test",
     "port": 1338,
-    "production": false,
     "development": true,
-    "baseURL": "https://rsc2003.com"
+    "baseURL": "https://rsc2003.com/"
 }

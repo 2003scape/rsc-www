@@ -12,7 +12,7 @@ export default function ButtonWheel(props) {
     });
 
     buttons.unshift(
-        <Link key={buttons.length} href="/play">
+        <Link key={buttons.length} href="http://rsc2003.com:1337/index.html">
             <a
                 className="rsc-button rsc-play-button"
                 title="Start or continue your RuneScape adventure"
