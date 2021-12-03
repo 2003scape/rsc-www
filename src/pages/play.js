@@ -8,7 +8,7 @@ function GameSelectButton(props) {
 
     return (
         <div className={`rsc-game-select rsc-select-${type}`}>
-            <Link href="//farts.com">
+            <Link href="https://rs2003.com/play">
                 <a className="rsc-select-button">
                     <small>Click here for</small>
 
@@ -30,8 +30,7 @@ export default function Play() {
             <Container>
                 <PageName pageName="Select Game Type" />
                 <section className="rsc-game-select-wrap">
-                    <GameSelectButton type="free" />
-                    <GameSelectButton type="members" />
+                    
                 </section>
                 <div className="rsc-scroll">
                     <label htmlFor="rsc-client-type">

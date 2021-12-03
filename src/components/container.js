@@ -7,27 +7,21 @@ import { useContext } from 'react';
 const SOCIAL_LINKS = [
     {
         name: 'GitHub',
-        href: 'https://github.com/2003scape',
+        href: 'https://github.com/rsc2003',
         image: '/social/github.png',
         title: 'Fork us on GitHub!'
     },
     {
         name: 'Discord',
-        href: 'https://discord.gg/zbZAXRAg2p',
+        href: 'https://discord.gg/GgwXrxjxNa',
         image: '/social/discord.png',
-        title: 'Chat with the 2003Scape community on Discord'
+        title: 'Chat with the rsc2003 community on Discord'
     },
     {
-        name: 'Reddit',
-        href: 'https://reddit.com/r/2003scape',
-        image: '/social/reddit.png',
-        title: 'Subscribe to /r/2003scape'
-    },
-    {
-        name: 'YouTube',
+        name: 'twitter',
         href: 'https://www.youtube.com/channel/UCOVznMz6bUC-v2zzy7d2m3w',
-        image: '/social/youtube.png',
-        title: 'Watch the latest 2003Scape videos'
+        image: '/social/twitter.png',
+        title: 'rsc2003.com on twitter'
     },
     {
         name: 'RuneScape Classic Wiki',
@@ -103,7 +97,7 @@ export default function Container(props) {
                     className="rsc-register-link rsc-small-block rsc-small-spaced"
                     title="Create a RuneScape account."
                 >
-                    Create account
+                    Connect Wallet
                 </a>
             </Link>
         </>

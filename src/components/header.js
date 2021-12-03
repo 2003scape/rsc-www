@@ -1,13 +1,12 @@
 import Head from 'next/head';
 
 const DESCRIPTION =
-    'Runescape is a massive 3d multiplayer adventure, with monsters to kill, ' +
-    'quests to complete, and treasure to win.';
+    'rsc2003.com is a RuneScape classic 2003 private server. RSC is no longer upkept and we hope to keep a small spark of what was the greatest #mmorpg of all time alive.';
 
 export default function Header(props) {
     const title =
         (props.pageName ? `${props.pageName} - ` : '') +
-        'RuneScape by Jagex Ltd';
+        'rsc2003.com';
 
     return (
         <div>

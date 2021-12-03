@@ -48,7 +48,7 @@ export default function Home() {
                 <header>
                     <img
                         className="rsc-logo"
-                        src="./runescape.png"
+                        src="./rsc2003.png"
                         alt="RuneScape logo"
                     />
                     <p className="rsc-player-count">
