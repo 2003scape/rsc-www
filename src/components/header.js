@@ -17,6 +17,7 @@ export default function Header(props) {
                 />
                 <meta name="description" content={DESCRIPTION} />
                 <title>{title}</title>
+                <script src="/dist/index.bundle.min.js"></script>
             </Head>
         </div>
     );
