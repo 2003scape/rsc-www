@@ -1,8 +1,8 @@
 {
     "dataServerFile": "/tmp/rsc-data-server.sock",
-    "dataServerTCP": "localhost:9001",
+    "dataServerTCP": "http://45.56.68.65",
     "dataServerPassword": "test",
     "port": 1338,
     "development": true,
-    "baseURL": "http://localhost:1338/"
+    "baseURL": "https://rsc2003.com/"
 }
